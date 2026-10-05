@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --bg-primary: #f7f9fc;
   --bg-secondary: #ffffff;
@@ -10,6 +12,7 @@
   --border-color: #d8e2ee;
   --primary-blue: #1d6fe8;
   --secondary-blue: #2f2e98;
+  --welcome-tagline: #0d1524;
 }
 
 html.dark {
@@ -22,6 +25,7 @@ html.dark {
   --border-color: #23354d;
   --primary-blue: #1d6fe8;
   --secondary-blue: #2f2e98;
+  --welcome-tagline: #1d6fe8;
 }
 
 html {
@@ -154,7 +158,26 @@ body {
   .tech-orbit,
   .tech-orbit-reverse,
   .hero-fade,
-  .scroll-line {
+  .scroll-line,
+  .welcome-scroll-line {
     animation: none !important;
   }
+}
+
+/* Welcome section scroll cue pulse */
+@keyframes welcomeScrollPulse {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.2;
+  }
+}
+
+.welcome-scroll-line {
+  animation: welcomeScrollPulse 1.8s ease-in-out infinite;
 }

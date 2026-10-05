@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import LiveTechVisual from "./components/LiveTechVisual";
 import PlexusBackground from "./components/PlexusBackground";
 import ThemeToggle from "./components/ThemeToggle";
+import WelcomeHero from "./components/WelcomeHero";
 import { projectsData } from "./data/projects";
 
 const heroChips = [
@@ -15,6 +16,34 @@ const heroChips = [
   { name: "Supabase", icon: "/assets/icons/supabase.svg" },
   { name: "Git", icon: "/assets/icons/github.svg" },
   { name: "Android", icon: "/assets/icons/android.svg" },
+];
+
+const socialContacts = [
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/imran.hasan.310303/",
+    icon: "/assets/icons/social/facebook.svg",
+  },
+  {
+    name: "Gmail",
+    url: "mailto:imranhasan13421@gmail.com?subject=Hello&body=I%20want%20to%20contact%20with%20you",
+    icon: "/assets/icons/social/gmail.svg",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/md-imran-hasan-441a70373/",
+    icon: "/assets/icons/social/linkedin.svg",
+  },
+  {
+    name: "Telegram",
+    url: "https://t.me/imran13421",
+    icon: "/assets/icons/social/telegram.svg",
+  },
+  {
+    name: "WhatsApp",
+    url: "https://wa.me/+8801401439995",
+    icon: "/assets/icons/social/whatsapp.svg",
+  },
 ];
 
 const skills = [
@@ -147,6 +176,9 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* Welcome Intro Section — full-screen SVG path-drawing animation */}
+      <WelcomeHero />
+
       {/* Interactive Plexus Canvas Background */}
       <PlexusBackground />
 
@@ -873,8 +905,35 @@ export default function Home() {
 
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[var(--text-secondary)]">
             Have an idea, project, or opportunity? Let&apos;s talk about it.
-            You can inspect my work, contribute, or reach out through GitHub.
+            Reach out directly through any of these platforms or connect on GitHub.
           </p>
+
+          {/* Social Platforms Centered Horizontally in Order with Equal Gaps */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            {socialContacts.map((item) => (
+              <a
+                key={item.name}
+                href={item.url}
+                target={item.url.startsWith("mailto:") ? undefined : "_blank"}
+                rel={item.url.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                aria-label={item.name}
+                title={item.name}
+                className="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--primary-blue)] hover:shadow-lg hover:shadow-[var(--primary-blue)]/20 active:scale-95"
+              >
+                <Image
+                  src={item.icon}
+                  alt={item.name}
+                  width={40}
+                  height={40}
+                  unoptimized
+                  className="h-9 w-9 sm:h-10 sm:w-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+                <span className="pointer-events-none absolute -bottom-8 z-20 whitespace-nowrap rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-2 py-0.5 text-[11px] font-medium text-[var(--text-primary)] opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100">
+                  {item.name}
+                </span>
+              </a>
+            ))}
+          </div>
 
           <div className="mt-8 flex flex-wrap justify-center items-center gap-3">
             <a
