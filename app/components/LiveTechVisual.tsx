@@ -177,7 +177,7 @@ export default function LiveTechVisual() {
             IH
           </div>
           <div className="mt-1 text-[9px] font-bold tracking-[0.25em] text-[var(--text-secondary)]">
-            PRODUCT
+            STATS
           </div>
         </div>
       </div>
