@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050A12"/>
+      <stop offset="50%" stop-color="#0B1220"/>
+      <stop offset="100%" stop-color="#050A12"/>
+    </linearGradient>
+    <radialGradient id="blueGlow" cx="25%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#1D6FE8" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#1D6FE8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="purpleGlow" cx="85%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#2F2E98" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#2F2E98" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#23354D" stroke-width="0.75" stroke-opacity="0.4"/>
+    </pattern>
+    <linearGradient id="ihBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D6FE8"/>
+      <stop offset="100%" stop-color="#2F2E98"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#blueGlow)"/>
+  <rect width="1200" height="630" fill="url(#purpleGlow)"/>
+
+  <!-- Border Frame -->
+  <rect x="30" y="30" width="1140" height="570" rx="24" fill="none" stroke="#23354D" stroke-width="2"/>
+
+  <!-- Brand Monogram -->
+  <rect x="90" y="90" width="80" height="80" rx="22" fill="url(#ihBadge)"/>
+  <rect x="90" y="90" width="80" height="80" rx="22" fill="none" stroke="#1D6FE8" stroke-width="2" stroke-opacity="0.6"/>
+  <text x="130" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="900" fill="#FFFFFF" text-anchor="middle">IH</text>
+
+  <!-- Location Badge -->
+  <rect x="190" y="105" width="280" height="42" rx="21" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+  <circle cx="212" cy="126" r="5" fill="#1D6FE8"/>
+  <text x="228" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#9AAEC4" letter-spacing="1.5">SOFTWARE DEVELOPER • BANGLADESH</text>
+
+  <!-- Main Title -->
+  <text x="90" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="68" font-weight="800" fill="#F5F9FF" letter-spacing="-1">
+    MD. IMRAN HASAN
+  </text>
+
+  <!-- Subtitle -->
+  <text x="90" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="700" fill="#1D6FE8">
+    Flutter <tspan fill="#64748B">•</tspan> UI/UX <tspan fill="#64748B">•</tspan> Product Development
+  </text>
+
+  <!-- Supporting statement -->
+  <text x="90" y="405" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#9AAEC4">
+    Building ideas into practical digital experiences.
+  </text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(90, 475)">
+    <rect x="0" y="0" width="130" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="65" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">EzzeWash</text>
+
+    <rect x="145" y="0" width="120" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="205" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">ATLANTA</text>
+
+    <rect x="280" y="0" width="130" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="345" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">EzzeMusic</text>
+
+    <rect x="425" y="0" width="115" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="482" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">EzzeCV</text>
+
+    <rect x="555" y="0" width="145" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="627" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">EzzeExpense</text>
+
+    <rect x="715" y="0" width="130" height="44" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+    <text x="780" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F5F9FF" text-anchor="middle">ShEC CSE</text>
+  </g>
+
+  <!-- URL Tag -->
+  <text x="1110" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#9AAEC4" text-anchor="end" letter-spacing="1">
+    imranhasan.vercel.app
+  </text>
+</svg>

@@ -1,146 +1,78 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./components/ThemeToggle";
+import { projectsData } from "./data/projects";
 
 const skills = [
   {
     title: "Flutter",
-    description: "Cross-platform mobile application development.",
+    category: "Primary Framework",
+    description: "Cross-platform mobile application development with responsive widgets and custom painters.",
     level: "Primary",
   },
   {
     title: "Dart",
-    description: "Application logic, state management, and clean architecture.",
+    category: "Language & Architecture",
+    description: "Application logic, state management with BLoC/Provider, streams, and clean architecture.",
     level: "Primary",
   },
   {
     title: "UI / UX",
-    description: "Modern interfaces, visual hierarchy, and product experience.",
-    level: "Core",
+    category: "Product Design",
+    description: "Modern interfaces, visual hierarchy, user journey mapping, and micro-interactions.",
+    level: "Core Focus",
   },
   {
     title: "Figma",
-    description: "Interface exploration, layouts, and design systems.",
+    category: "Design Systems",
+    description: "Design systems, layout wireframing, high-fidelity prototypes, and component libraries.",
     level: "Design",
   },
   {
     title: "Supabase",
-    description: "Backend services, authentication, database, and storage.",
+    category: "Backend & Cloud",
+    description: "Relational PostgreSQL databases, Row Level Security, Realtime subscriptions, Auth, and Storage.",
     level: "Backend",
   },
   {
     title: "Git & GitHub",
-    description: "Version control, repositories, and collaborative development.",
+    category: "Version Control",
+    description: "Branching strategies, collaborative workflows, code versioning, and documentation.",
     level: "Workflow",
   },
 ];
 
-const projects = [
+const aboutCards = [
   {
-    id: "ezzewash",
     number: "01",
-    category: "FLAGSHIP SYSTEM",
-    title: "EzzeWash",
-    subtitle: "Full-Stack Laundry Service & Management Ecosystem",
+    title: "Development",
+    focus: "Flutter • Dart • Application Development",
     description:
-      "A multi-platform laundry service ecosystem built as my B.Sc. CSE final-year project, connecting customers, administrators, and delivery riders through dedicated applications and a responsive web experience.",
-    technologies: ["Flutter", "Supabase", "PostgreSQL", "BLoC", "GoRouter"],
-    github: "https://github.com/ImranHasan13421",
-    details: [
-      "Customer application",
-      "Admin management application",
-      "Rider application",
-      "Responsive promotional website",
-      "Authentication and database services",
-      "Order and delivery workflow",
-    ],
-    featured: true,
+      "Crafting multi-platform mobile applications with clean architecture, robust state management, and reliable offline-first capabilities.",
   },
   {
-    id: "atlanta",
     number: "02",
-    category: "AI APPLICATION",
-    title: "ATLANTA",
-    subtitle: "Personal AI Assistant & Cyber-Tech Command Center",
+    title: "Design",
+    focus: "UI/UX • Figma • Design Systems",
     description:
-      "A Flutter-based personal AI assistant exploring conversational AI, voice interaction, productivity automation, and connected-device capabilities.",
-    technologies: ["Flutter", "Gemini", "AI", "Voice"],
-    github: "https://github.com/ImranHasan13421/ATLANTA",
-    details: [
-      "Conversational AI",
-      "Voice interaction",
-      "Productivity automation",
-      "Connected-device concepts",
-    ],
+      "Translating product ideas into intuitive user flows, polished tactile micro-interactions, and coherent design systems.",
   },
   {
-    id: "ezzemusic",
     number: "03",
-    category: "MOBILE APPLICATION",
-    title: "EzzeMusic",
-    subtitle: "Premium Offline Music Player",
+    title: "Backend",
+    focus: "Supabase • PostgreSQL • Realtime",
     description:
-      "A premium offline music player focused on local audio, dynamic themes, glassmorphism, background playback, and an immersive Now Playing experience.",
-    technologies: ["Flutter", "Dart", "UI/UX", "Offline"],
-    github: "https://github.com/ImranHasan13421/EzzeMusic",
-    details: [
-      "Local audio scanning",
-      "Background playback",
-      "Dynamic themes",
-      "Vinyl-style Now Playing experience",
-    ],
+      "Structuring relational database schemas, secure authentication, file storage, and live real-time synchronization.",
   },
   {
-    id: "ezzecv",
     number: "04",
-    category: "PRODUCTIVITY",
-    title: "EzzeCV",
-    subtitle: "Offline CV & Resume Builder",
+    title: "Workflow",
+    focus: "Git • GitHub • Product Thinking",
     description:
-      "An offline CV builder with multiple templates, live customization, PDF generation, local drafts, backup and restore functionality.",
-    technologies: ["Flutter", "Provider", "PDF", "Offline"],
-    github: "https://github.com/ImranHasan13421/EzzeCVmaker",
-    details: [
-      "Five CV templates",
-      "PDF generation",
-      "Local drafts",
-      "JSON backup and restore",
-    ],
-  },
-  {
-    id: "ezzeexpense",
-    number: "05",
-    category: "FINANCE",
-    title: "EzzeExpense",
-    subtitle: "Personal Expense & Budget Tracker",
-    description:
-      "An offline expense management application with budgets, analytics, category breakdowns, spending insights, and financial comparisons.",
-    technologies: ["Flutter", "Dart", "Analytics", "Offline"],
-    github: "https://github.com/ImranHasan13421/EzzeExpense",
-    details: [
-      "Monthly and category budgets",
-      "Spending analytics",
-      "Charts and comparisons",
-      "Search and filtering",
-    ],
-  },
-  {
-    id: "shec-cse",
-    number: "06",
-    category: "COMMUNITY PLATFORM",
-    title: "ShEC CSE",
-    subtitle: "Departmental Information & Communication Platform",
-    description:
-      "A departmental CSE mobile application designed around academic tracking, campus communication, career navigation, messaging, and department resources.",
-    technologies: ["Flutter", "Supabase", "Cloud Storage", "Communication"],
-    github: "https://github.com/ImranHasan13421/ShEC-CSE",
-    details: [
-      "Academic information",
-      "Department communication",
-      "Career navigation",
-      "Messaging and resources",
-    ],
+      "Applying disciplined version control, technical problem-solving, and a product-focused approach from idea to deployment.",
   },
 ];
 
@@ -149,82 +81,56 @@ const journey = [
     period: "2020 — 2021",
     title: "Started BSc in CSE",
     description:
-      "Started the Computer Science & Engineering journey at Shyamoli Engineering College.",
+      "Began Bachelor of Science in Computer Science & Engineering at Shyamoli Engineering College, establishing strong computational fundamentals and object-oriented programming principles.",
   },
   {
     period: "During university",
     title: "Moved from learning to building",
     description:
-      "Started turning coursework and ideas into practical applications, interfaces, and software projects.",
+      "Transitioned theoretical knowledge into practical software products. Focused deeply on the Flutter framework, UI/UX prototyping, state management, and developer tooling.",
   },
   {
     period: "Final Year",
     title: "Built EzzeWash",
     description:
-      "Worked on a multi-platform laundry service and management ecosystem as the B.Sc. CSE final-year project.",
+      "Engineered EzzeWash, a full-scale multi-platform laundry management ecosystem (Customer App, Admin Center, Rider Logistics, Web Portal, Supabase) as the collaborative final-year project.",
   },
   {
     period: "Now",
     title: "Software Developer",
     description:
-      "Continuing to build Flutter applications, product experiences, and independent software projects.",
+      "Actively building practical digital products, refining Flutter and UI/UX expertise, and creating dependable software with product-oriented ownership.",
   },
 ];
 
+const projectList = Object.values(projectsData);
+const featuredProject = projectList.find((p) => p.featured) || projectList[0];
+const otherProjects = projectList.filter((p) => p.id !== featuredProject.id);
+
 export default function Home() {
-  const [dark, setDark] = useState(true);
-  const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("portfolio-theme");
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
 
-    if (savedTheme === "light") {
-      setDark(false);
-    } else if (savedTheme === "dark") {
-      setDark(true);
-    } else {
-      setDark(!window.matchMedia("(prefers-color-scheme: light)").matches);
-    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-    localStorage.setItem("portfolio-theme", dark ? "dark" : "light");
-  }, [dark]);
-
   return (
-    <main
-      className={`min-h-screen overflow-x-hidden transition-colors duration-500 ${
-        dark
-          ? "bg-[#050A12] text-[#F5F9FF]"
-          : "bg-[#F7F9FC] text-[#101828]"
-      }`}
-    >
-      {/* Ambient Background */}
+    <main className="min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* Ambient background glows */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div
-          className={`absolute left-[8%] top-[5%] h-[420px] w-[420px] rounded-full blur-[140px] ${
-            dark ? "bg-[#1D6FE8]/10" : "bg-[#1D6FE8]/8"
-          }`}
-        />
+        <div className="absolute left-[8%] top-[5%] h-[450px] w-[450px] rounded-full bg-[#1D6FE8]/10 blur-[140px]" />
+        <div className="absolute right-[-10%] top-[35%] h-[520px] w-[520px] rounded-full bg-[#2F2E98]/10 blur-[160px]" />
+        <div className="absolute bottom-[-10%] left-[25%] h-[400px] w-[400px] rounded-full bg-[#1D6FE8]/8 blur-[150px]" />
 
         <div
-          className={`absolute right-[-10%] top-[35%] h-[500px] w-[500px] rounded-full blur-[160px] ${
-            dark ? "bg-[#2F2E98]/10" : "bg-[#2F2E98]/7"
-          }`}
-        />
-
-        <div
-          className={`absolute bottom-[-10%] left-[25%] h-[400px] w-[400px] rounded-full blur-[150px] ${
-            dark ? "bg-[#1D6FE8]/6" : "bg-[#1D6FE8]/5"
-          }`}
-        />
-
-        <div
-          className={`absolute inset-0 ${
-            dark ? "opacity-[0.035]" : "opacity-[0.025]"
-          }`}
+          className="absolute inset-0 opacity-[0.035] dark:opacity-[0.045]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(29,111,232,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(29,111,232,0.5) 1px, transparent 1px)",
@@ -234,182 +140,160 @@ export default function Home() {
       </div>
 
       {/* Navbar */}
-      <nav
-        className={`fixed left-1/2 top-4 z-50 w-[calc(100%-24px)] max-w-6xl -translate-x-1/2 rounded-2xl border backdrop-blur-xl ${
-          dark
-            ? "border-[#23354D] bg-[#0B1220]/75"
-            : "border-slate-200 bg-white/80"
-        }`}
-      >
-        <div className="flex h-[68px] items-center justify-between px-4 sm:px-6">
-          <a href="#home" className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1D6FE8] text-sm font-bold text-white shadow-[0_0_25px_rgba(29,111,232,0.35)]">
+      <header className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 pt-4">
+        <nav
+          className={`flex w-full max-w-6xl items-center justify-between rounded-2xl border px-4 py-3 transition-all duration-300 sm:px-6 ${
+            scrolled
+              ? "border-[var(--border-color)] bg-[var(--bg-secondary)]/90 shadow-xl backdrop-blur-xl"
+              : "border-[var(--border-color)]/80 bg-[var(--bg-secondary)]/75 backdrop-blur-md"
+          }`}
+        >
+          <a href="#home" className="group flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--primary-blue)] text-sm font-bold text-white shadow-[0_0_20px_rgba(29,111,232,0.35)] transition-transform group-hover:scale-105">
               IH
             </div>
 
             <div className="hidden sm:block">
-              <p className="text-sm font-semibold">MD. Imran Hasan</p>
-              <p
-                className={`text-[10px] tracking-[0.18em] ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
+              <p className="text-sm font-semibold tracking-tight text-[var(--text-primary)]">
+                MD. Imran Hasan
+              </p>
+              <p className="text-[10px] tracking-[0.2em] text-[var(--text-secondary)]">
                 SOFTWARE DEVELOPER
               </p>
             </div>
           </a>
 
           <div className="hidden items-center gap-7 md:flex">
-            {["About", "Skills", "Projects", "Journey", "Contact"].map(
-              (item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className={`text-sm transition-colors ${
-                    dark
-                      ? "text-[#9AAEC4] hover:text-white"
-                      : "text-slate-500 hover:text-slate-950"
-                  }`}
-                >
-                  {item}
-                </a>
-              )
-            )}
+            {["About", "Skills", "Projects", "Journey", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+              >
+                {item}
+              </a>
+            ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <a
               href="https://github.com/ImranHasan13421"
               target="_blank"
-              rel="noreferrer"
-              className={`hidden rounded-xl border px-4 py-2 text-xs font-medium transition-all sm:block ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B] text-[#F5F9FF] hover:border-[#1D6FE8]"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-[#1D6FE8]"
-              }`}
+              rel="noopener noreferrer"
+              className="hidden rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)] sm:inline-flex items-center gap-1.5"
             >
-              GitHub
+              <span>GitHub</span>
+              <span className="text-[11px] text-[var(--primary-blue)]">↗</span>
             </a>
 
-            <button
-              onClick={() => setDark(!dark)}
-              aria-label="Toggle theme"
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border text-lg transition-all ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B] hover:border-[#1D6FE8]"
-                  : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-              }`}
-            >
-              {dark ? "☼" : "☾"}
-            </button>
+            <ThemeToggle />
 
             <button
               onClick={() => setMobileMenu(!mobileMenu)}
               aria-label="Toggle mobile menu"
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border md:hidden ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B]"
-                  : "border-slate-200 bg-white"
-              }`}
+              aria-expanded={mobileMenu}
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] md:hidden"
             >
               <div className="space-y-1.5">
-                <span className="block h-px w-4 bg-current" />
-                <span className="block h-px w-4 bg-current" />
-                <span className="block h-px w-3 bg-current" />
+                <span
+                  className={`block h-0.5 w-4 bg-current transition-transform ${
+                    mobileMenu ? "translate-y-2 rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-4 bg-current transition-opacity ${
+                    mobileMenu ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-0.5 w-4 bg-current transition-transform ${
+                    mobileMenu ? "-translate-y-2 -rotate-45" : ""
+                  }`}
+                />
               </div>
             </button>
           </div>
-        </div>
+        </nav>
 
+        {/* Mobile Navigation Dropdown */}
         {mobileMenu && (
-          <div
-            className={`border-t px-5 py-5 md:hidden ${
-              dark ? "border-[#23354D]" : "border-slate-200"
-            }`}
-          >
-            <div className="flex flex-col gap-4">
-              {["About", "Skills", "Projects", "Journey", "Contact"].map(
-                (item) => (
+          <>
+            <div
+              onClick={() => setMobileMenu(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+            />
+            <div
+              className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 shadow-2xl md:hidden"
+            >
+              <div className="flex flex-col gap-4">
+                {["About", "Skills", "Projects", "Journey", "Contact"].map((item) => (
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
                     onClick={() => setMobileMenu(false)}
-                    className="text-sm"
+                    className="text-base font-semibold text-[var(--text-primary)] hover:text-[var(--primary-blue)]"
                   >
                     {item}
                   </a>
-                )
-              )}
-
-              <a
-                href="https://github.com/ImranHasan13421"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-[#1D6FE8]"
-              >
-                GitHub ↗
-              </a>
+                ))}
+                <div className="pt-2 border-t border-[var(--border-color)] flex justify-between items-center">
+                  <a
+                    href="https://github.com/ImranHasan13421"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-semibold text-[var(--primary-blue)]"
+                  >
+                    GitHub Profile ↗
+                  </a>
+                  <span className="text-xs text-[var(--text-secondary)]">MD. Imran Hasan</span>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
-      </nav>
+      </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <section
         id="home"
-        className="relative flex min-h-screen items-center px-6 pb-20 pt-32 sm:px-10 lg:px-16"
+        className="relative flex min-h-[92vh] items-center px-6 pb-20 pt-36 sm:px-10 lg:px-16"
       >
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <div
-              className={`mb-7 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B]/70 text-[#9AAEC4]"
-                  : "border-slate-200 bg-white/80 text-slate-500"
-              }`}
-            >
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="hero-fade">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-1.5 text-xs font-medium text-[var(--text-secondary)] shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1D6FE8] opacity-60" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1D6FE8] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1D6FE8]" />
               </span>
-              Software Developer • Bangladesh
+              <span>Software Developer • Bangladesh</span>
             </div>
 
-            <p className="mb-3 text-sm font-medium tracking-[0.25em] text-[#1D6FE8]">
+            <p className="mb-2 text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)] uppercase">
               MD. IMRAN HASAN
             </p>
 
-            <h1 className="max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
               Software
-              <span className="block bg-gradient-to-r from-[#1D6FE8] to-[#6D6BFF] bg-clip-text text-transparent">
+              <span className="block text-[var(--primary-blue)]">
                 Developer.
               </span>
             </h1>
 
-            <p
-              className={`mt-6 text-lg font-medium sm:text-xl ${
-                dark ? "text-[#F5F9FF]" : "text-slate-800"
-              }`}
-            >
-              Flutter <span className="mx-2 text-[#1D6FE8]">•</span> UI/UX{" "}
-              <span className="mx-2 text-[#1D6FE8]">•</span> Product
-              Development
+            <p className="mt-5 text-lg font-semibold sm:text-xl text-[var(--text-primary)]">
+              Flutter <span className="mx-2 text-[var(--primary-blue)]">•</span> UI/UX{" "}
+              <span className="mx-2 text-[var(--primary-blue)]">•</span> Product Development
             </p>
 
-            <p
-              className={`mt-5 max-w-2xl text-base leading-7 ${
-                dark ? "text-[#9AAEC4]" : "text-slate-500"
-              }`}
-            >
-              Building ideas into practical digital experiences through
-              thoughtful interfaces, useful applications, and product-focused
-              development.
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
+              Building ideas into practical digital experiences through thoughtful
+              interfaces, well-structured Flutter applications, and a product-focused
+              engineering mindset.
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
-                className="rounded-xl bg-[#1D6FE8] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(29,111,232,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(29,111,232,0.4)]"
+                className="rounded-xl bg-[var(--primary-blue)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(29,111,232,0.28)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(29,111,232,0.45)]"
               >
                 View Projects →
               </a>
@@ -417,308 +301,219 @@ export default function Home() {
               <a
                 href="https://github.com/ImranHasan13421"
                 target="_blank"
-                rel="noreferrer"
-                className={`rounded-xl border px-6 py-3.5 text-sm font-semibold transition-all ${
-                  dark
-                    ? "border-[#23354D] bg-[#111C2B]/80 hover:border-[#1D6FE8]"
-                    : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-                }`}
+                rel="noopener noreferrer"
+                className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-6 py-3.5 text-sm font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)] hover:-translate-y-0.5"
               >
-                Explore GitHub ↗
+                GitHub Profile ↗
               </a>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-2">
-              {["Flutter", "Dart", "UI/UX", "Supabase", "Git"].map(
-                (skill) => (
-                  <span
-                    key={skill}
-                    className={`rounded-full border px-3 py-1.5 text-xs ${
-                      dark
-                        ? "border-[#23354D] bg-[#0B1220]/70 text-[#9AAEC4]"
-                        : "border-slate-200 bg-white text-slate-500"
-                    }`}
-                  >
-                    {skill}
-                  </span>
-                )
-              )}
+              {["Flutter", "Dart", "UI/UX", "Supabase", "Git"].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3.5 py-1 text-xs font-medium text-[var(--text-secondary)]"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Hero Visual */}
-          <div className="relative mx-auto hidden h-[500px] w-full max-w-[500px] lg:block">
-            <div
-              className={`absolute inset-10 rounded-full border ${
-                dark ? "border-[#23354D]/60" : "border-slate-200"
-              }`}
-            />
+          {/* Hero Technical Visual (Circular geometry, nodes, SVG network) */}
+          <div className="relative mx-auto hidden h-[460px] w-full max-w-[460px] lg:block">
+            {/* Outer geometry */}
+            <div className="absolute inset-4 rounded-full border border-[var(--border-color)]/70 tech-orbit" />
+            <div className="absolute inset-16 rounded-full border border-dashed border-[var(--primary-blue)]/30 tech-orbit-reverse" />
+            <div className="absolute inset-28 rounded-full border border-[var(--border-color)]/40" />
 
-            <div
-              className={`absolute inset-20 rounded-full border border-dashed ${
-                dark ? "border-[#1D6FE8]/20" : "border-[#1D6FE8]/15"
-              }`}
-            />
-
-            <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[32px] border border-[#1D6FE8]/40 bg-[#111C2B]/80 shadow-[0_0_80px_rgba(29,111,232,0.18)] backdrop-blur-xl">
+            {/* Central Monogram */}
+            <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[32px] border border-[var(--primary-blue)]/50 bg-[var(--bg-card)] shadow-[0_0_60px_rgba(29,111,232,0.25)] backdrop-blur-xl">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[#1D6FE8]">IH</div>
-                <div
-                  className={`mt-1 text-[9px] tracking-[0.25em] ${
-                    dark ? "text-[#9AAEC4]" : "text-slate-500"
-                  }`}
-                >
-                  DIGITAL
+                <div className="text-3xl font-extrabold text-[var(--primary-blue)] tracking-wider">
+                  IH
+                </div>
+                <div className="mt-1 text-[9px] font-bold tracking-[0.25em] text-[var(--text-secondary)]">
+                  PRODUCT
                 </div>
               </div>
             </div>
 
+            {/* Orbiting Tech Labels */}
             {[
-              ["FLUTTER", "top-[10%] left-1/2 -translate-x-1/2"],
-              ["UI / UX", "right-[4%] top-1/2 -translate-y-1/2"],
-              ["PRODUCT", "bottom-[11%] left-1/2 -translate-x-1/2"],
-              ["CODE", "left-[4%] top-1/2 -translate-y-1/2"],
-            ].map(([label, position]) => (
+              { label: "FLUTTER", pos: "top-[6%] left-1/2 -translate-x-1/2" },
+              { label: "UI / UX", pos: "right-[2%] top-1/2 -translate-y-1/2" },
+              { label: "PRODUCT", pos: "bottom-[6%] left-1/2 -translate-x-1/2" },
+              { label: "CODE", pos: "left-[2%] top-1/2 -translate-y-1/2" },
+            ].map(({ label, pos }) => (
               <div
                 key={label}
-                className={`absolute ${position} rounded-xl border px-4 py-2 text-[10px] font-semibold tracking-[0.2em] ${
-                  dark
-                    ? "border-[#23354D] bg-[#111C2B]/80 text-[#9AAEC4]"
-                    : "border-slate-200 bg-white/90 text-slate-500"
-                } backdrop-blur-md`}
+                className={`absolute ${pos} rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)]/90 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.2em] text-[var(--text-primary)] shadow-md backdrop-blur-md`}
               >
                 {label}
               </div>
             ))}
 
-            <div className="absolute left-[20%] top-[23%] h-2 w-2 rounded-full bg-[#1D6FE8] shadow-[0_0_20px_#1D6FE8]" />
-            <div className="absolute right-[20%] top-[29%] h-1.5 w-1.5 rounded-full bg-[#6D6BFF] shadow-[0_0_18px_#6D6BFF]" />
-            <div className="absolute bottom-[25%] left-[18%] h-1.5 w-1.5 rounded-full bg-[#1D6FE8] shadow-[0_0_18px_#1D6FE8]" />
-            <div className="absolute bottom-[21%] right-[23%] h-2 w-2 rounded-full bg-[#6D6BFF] shadow-[0_0_20px_#6D6BFF]" />
+            {/* Glowing Nodes */}
+            <div className="absolute left-[18%] top-[22%] h-2.5 w-2.5 rounded-full bg-[#1D6FE8] shadow-[0_0_20px_#1D6FE8] tech-node" />
+            <div className="absolute right-[20%] top-[26%] h-2 w-2 rounded-full bg-[#6D6BFF] shadow-[0_0_18px_#6D6BFF] tech-node" />
+            <div className="absolute bottom-[24%] left-[18%] h-2 w-2 rounded-full bg-[#1D6FE8] shadow-[0_0_18px_#1D6FE8] tech-node" />
+            <div className="absolute bottom-[20%] right-[22%] h-2.5 w-2.5 rounded-full bg-[#6D6BFF] shadow-[0_0_20px_#6D6BFF] tech-node" />
 
+            {/* SVG Network Lines */}
             <svg
-              className="absolute inset-0 h-full w-full opacity-40"
-              viewBox="0 0 500 500"
+              className="absolute inset-0 h-full w-full opacity-35"
+              viewBox="0 0 460 460"
               fill="none"
+              aria-hidden="true"
             >
               <path
-                d="M125 125 L250 185 L375 145 M125 125 L145 250 L250 315 M375 145 L355 260 L250 315 M145 250 L250 185 L355 260"
+                d="M110 110 L230 170 L350 130 M110 110 L130 230 L230 290 M350 130 L330 240 L230 290 M130 230 L230 170 L330 240"
                 stroke="#1D6FE8"
-                strokeWidth="1"
+                strokeWidth="1.2"
               />
-              <circle cx="125" cy="125" r="4" fill="#1D6FE8" />
-              <circle cx="375" cy="145" r="4" fill="#6D6BFF" />
-              <circle cx="145" cy="250" r="4" fill="#1D6FE8" />
-              <circle cx="355" cy="260" r="4" fill="#6D6BFF" />
-              <circle cx="250" cy="315" r="4" fill="#1D6FE8" />
+              <circle cx="110" cy="110" r="4" fill="#1D6FE8" />
+              <circle cx="350" cy="130" r="4" fill="#6D6BFF" />
+              <circle cx="130" cy="230" r="4" fill="#1D6FE8" />
+              <circle cx="330" cy="240" r="4" fill="#6D6BFF" />
+              <circle cx="230" cy="290" r="4" fill="#1D6FE8" />
             </svg>
           </div>
         </div>
 
+        {/* Scroll indicator */}
         <a
           href="#about"
-          className={`absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[10px] tracking-[0.25em] md:flex ${
-            dark ? "text-[#64748B]" : "text-slate-400"
-          }`}
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-bold tracking-[0.25em] text-[var(--text-secondary)] md:flex"
         >
-          SCROLL
-          <span className="h-10 w-px bg-gradient-to-b from-[#1D6FE8] to-transparent" />
+          <span>SCROLL</span>
+          <span className="h-8 w-px bg-gradient-to-b from-[var(--primary-blue)] to-transparent" />
         </a>
       </section>
 
-      {/* About */}
+      {/* About Section */}
       <section
         id="about"
-        className={`border-t px-6 py-28 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
+        className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
       >
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-[#1D6FE8]">
+              <p className="text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)]">
                 ABOUT ME
               </p>
-
-              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl text-[var(--text-primary)]">
                 More than
-                <span className="block text-[#1D6FE8]">just code.</span>
+                <span className="block text-[var(--primary-blue)]">just code.</span>
               </h2>
             </div>
 
-            <div>
-              <p
-                className={`text-lg leading-8 ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
-                I&apos;m a software developer focused on building practical
-                digital products with Flutter, thoughtful UI/UX, and a
-                product-oriented mindset.
+            <div className="space-y-5 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)]">
+              <p>
+                I enjoy turning ideas into practical software products, combining
+                development with thoughtful interface design.
               </p>
-
-              <p
-                className={`mt-5 text-base leading-7 ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
-                My work sits between development and design — taking an idea,
-                understanding the problem behind it, shaping the experience,
-                and turning it into a usable product.
+              <p>
+                My work focuses primarily on Flutter application development, UI/UX,
+                and building complete product experiences.
               </p>
-
-              <p
-                className={`mt-5 text-base leading-7 ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
-                I enjoy working on mobile applications, product interfaces,
-                connected systems, and independent software projects where
-                functionality and experience need to work together.
+              <p>
+                Rather than focusing only on writing code, I enjoy understanding how a
+                product should work, how users interact with it, and how the different
+                pieces connect.
               </p>
             </div>
           </div>
 
+          {/* 4 Compact Info Cards */}
           <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ["01", "Software Developer", "Building useful software"],
-              ["02", "Flutter", "Cross-platform applications"],
-              ["03", "UI / UX", "Clear digital experiences"],
-              ["04", "Product Builder", "From idea to product"],
-            ].map(([number, title, subtitle]) => (
+            {aboutCards.map((card) => (
               <div
-                key={number}
-                className={`group rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
-                  dark
-                    ? "border-[#23354D] bg-[#111C2B]/65 hover:border-[#1D6FE8]/50"
-                    : "border-slate-200 bg-white hover:border-[#1D6FE8]/40"
-                }`}
+                key={card.number}
+                className="group rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--primary-blue)] shadow-sm"
               >
-                <div className="text-xs text-[#1D6FE8]">{number}</div>
-                <h3 className="mt-7 font-semibold">{title}</h3>
-                <p
-                  className={`mt-2 text-xs ${
-                    dark ? "text-[#64748B]" : "text-slate-400"
-                  }`}
-                >
-                  {subtitle}
+                <div className="text-xs font-bold text-[var(--primary-blue)]">
+                  {card.number}
+                </div>
+                <h3 className="mt-6 text-lg font-bold text-[var(--text-primary)]">
+                  {card.title}
+                </h3>
+                <p className="mt-1 text-xs font-semibold text-[var(--primary-blue)]">
+                  {card.focus}
+                </p>
+                <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+                  {card.description}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <div
-              className={`rounded-2xl border p-7 ${
-                dark
-                  ? "border-[#23354D] bg-[#0B1220]/70"
-                  : "border-slate-200 bg-white"
-              }`}
-            >
-              <p className="text-xs font-semibold tracking-[0.2em] text-[#1D6FE8]">
-                EDUCATION
+          {/* Education & Current Focus */}
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 shadow-sm">
+              <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
+                ACADEMIC FOUNDATION
               </p>
-
-              <h3 className="mt-5 text-xl font-semibold">
-                BSc in Computer Science & Engineering
+              <h3 className="mt-4 text-xl font-bold text-[var(--text-primary)]">
+                BSc in Computer Science &amp; Engineering
               </h3>
-
-              <p
-                className={`mt-2 text-sm ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
-                Shyamoli Engineering College
+              <p className="mt-1 text-sm font-medium text-[var(--text-secondary)]">
+                Shyamoli Engineering College • Session: 2020–2021
               </p>
-
-              <div
-                className={`mt-6 h-px ${
-                  dark ? "bg-[#23354D]" : "bg-slate-200"
-                }`}
-              />
-
-              <p
-                className={`mt-5 text-xs leading-6 ${
-                  dark ? "text-[#64748B]" : "text-slate-400"
-                }`}
-              >
-                Computer Science & Engineering background with a focus on
-                software development, application building, and practical
-                digital products.
+              <div className="my-5 h-px bg-[var(--border-color)]" />
+              <p className="text-xs leading-relaxed text-[var(--text-secondary)]">
+                Solid academic grounding in software development, data structures, algorithms,
+                and computer science principles, with a strong emphasis on practical product
+                implementation.
               </p>
             </div>
 
-            <div
-              className={`rounded-2xl border p-7 ${
-                dark
-                  ? "border-[#23354D] bg-[#0B1220]/70"
-                  : "border-slate-200 bg-white"
-              }`}
-            >
-              <p className="text-xs font-semibold tracking-[0.2em] text-[#1D6FE8]">
-                CURRENT FOCUS
+            <div className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 shadow-sm">
+              <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
+                DEVELOPMENT FOCUS
               </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {[
                   "Flutter Development",
-                  "UI/UX Design",
-                  "Product Development",
-                  "Modern Web",
-                  "Software Projects",
+                  "UI/UX Design Systems",
+                  "Product Engineering",
+                  "Cross-Platform Apps",
+                  "Offline-First Architecture",
+                  "Supabase & Realtime",
                 ].map((item) => (
                   <span
                     key={item}
-                    className={`rounded-full border px-3 py-2 text-xs ${
-                      dark
-                        ? "border-[#23354D] bg-[#111C2B] text-[#9AAEC4]"
-                        : "border-slate-200 bg-slate-50 text-slate-500"
-                    }`}
+                    className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)]"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-
-              <p
-                className={`mt-6 text-xs leading-6 ${
-                  dark ? "text-[#64748B]" : "text-slate-400"
-                }`}
-              >
-                Continuously improving the connection between engineering,
-                interface design, and product thinking.
+              <p className="mt-5 text-xs leading-relaxed text-[var(--text-secondary)]">
+                Continuously bridging engineering discipline with user interface craft,
+                turning complex product ideas into practical software.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Skills Section */}
       <section
         id="skills"
-        className={`border-t px-6 py-28 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
+        className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-14">
-            <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-[#1D6FE8]">
-              SKILLS
+            <p className="text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)]">
+              SKILLS &amp; TOOLKIT
             </p>
-
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Tools I use to
-              <span className="block text-[#1D6FE8]">build products.</span>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl text-[var(--text-primary)]">
+              Tools I build with.
             </h2>
-
-            <p
-              className={`mt-5 max-w-2xl text-sm leading-7 ${
-                dark ? "text-[#9AAEC4]" : "text-slate-500"
-              }`}
-            >
-              A practical toolkit centered around application development,
-              interface design, backend services, and modern development
-              workflows.
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
+              A curated technical toolkit centered around Flutter application development,
+              interface design, backend integration, and dependable development workflows.
             </p>
           </div>
 
@@ -727,347 +522,213 @@ export default function Home() {
               const active = activeSkill === skill.title;
 
               return (
-                <button
+                <div
                   key={skill.title}
-                  onClick={() =>
-                    setActiveSkill(active ? null : skill.title)
-                  }
-                  className={`group rounded-2xl border p-6 text-left transition-all duration-300 hover:-translate-y-1 ${
+                  onClick={() => setActiveSkill(active ? null : skill.title)}
+                  className={`group cursor-pointer rounded-2xl border p-6 text-left transition-all duration-300 hover:-translate-y-1 ${
                     active
-                      ? dark
-                        ? "border-[#1D6FE8] bg-[#111C2B]"
-                        : "border-[#1D6FE8] bg-white"
-                      : dark
-                        ? "border-[#23354D] bg-[#111C2B]/55 hover:border-[#1D6FE8]/50"
-                        : "border-slate-200 bg-white hover:border-[#1D6FE8]/40"
+                      ? "border-[var(--primary-blue)] bg-[var(--bg-elevated)] shadow-md"
+                      : "border-[var(--border-color)] bg-[var(--bg-card)] hover:border-[var(--primary-blue)]/50"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-lg font-semibold">{skill.title}</h3>
-
-                      <p
-                        className={`mt-2 text-sm leading-6 ${
-                          dark ? "text-[#9AAEC4]" : "text-slate-500"
-                        }`}
-                      >
+                      <h3 className="text-lg font-bold text-[var(--text-primary)]">
+                        {skill.title}
+                      </h3>
+                      <p className="text-xs font-semibold text-[var(--primary-blue)]">
+                        {skill.category}
+                      </p>
+                      <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
                         {skill.description}
                       </p>
                     </div>
 
-                    <span className="text-[#1D6FE8] transition-transform group-hover:translate-x-1">
+                    <span className="text-[var(--primary-blue)] transition-transform group-hover:translate-x-1">
                       ↗
                     </span>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between">
-                    <span
-                      className={`rounded-full border px-3 py-1 text-[10px] ${
-                        dark
-                          ? "border-[#23354D] text-[#64748B]"
-                          : "border-slate-200 text-slate-400"
-                      }`}
-                    >
+                  <div className="mt-6 flex items-center justify-between border-t border-[var(--border-color)] pt-4">
+                    <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-2.5 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]">
                       {skill.level}
                     </span>
-
-                    <span className="h-1 w-20 overflow-hidden rounded-full bg-[#23354D]">
-                      <span
-                        className={`block h-full rounded-full ${
-                          skill.level === "Primary"
-                            ? "w-[90%]"
-                            : skill.level === "Core"
-                              ? "w-[85%]"
-                              : skill.level === "Design"
-                                ? "w-[75%]"
-                                : skill.level === "Backend"
-                                  ? "w-[70%]"
-                                  : "w-[80%]"
-                        } bg-[#1D6FE8]`}
-                      />
+                    <span className="text-[11px] font-medium text-[var(--primary-blue)]">
+                      Verified Skill
                     </span>
                   </div>
-                </button>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Projects Section */}
       <section
         id="projects"
-        className={`border-t px-6 py-28 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
+        className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
-              <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-[#1D6FE8]">
+              <p className="text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)]">
                 SELECTED WORK
               </p>
-
-              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Projects built with
-                <span className="block text-[#1D6FE8]">purpose.</span>
+              <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl text-[var(--text-primary)]">
+                Projects built with purpose.
               </h2>
-
-              <p
-                className={`mt-5 max-w-2xl text-sm leading-7 ${
-                  dark ? "text-[#9AAEC4]" : "text-slate-500"
-                }`}
-              >
-                From a multi-platform service ecosystem to independent mobile
-                products and AI experiments.
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
+                A collection of products, applications, and systems built while exploring
+                software development, mobile architecture, and product design.
               </p>
             </div>
 
             <a
               href="https://github.com/ImranHasan13421?tab=repositories"
               target="_blank"
-              rel="noreferrer"
-              className="shrink-0 text-sm font-medium text-[#1D6FE8]"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--primary-blue)] hover:underline"
             >
-              All repositories →
+              <span>All repositories on GitHub</span>
+              <span>↗</span>
             </a>
           </div>
 
-          {/* Featured Project */}
-          <article
-            className={`overflow-hidden rounded-3xl border ${
-              dark
-                ? "border-[#23354D] bg-[#0B1220]"
-                : "border-slate-200 bg-white"
-            }`}
-          >
-            <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
-              <div
-                className={`relative min-h-[430px] overflow-hidden ${
-                  dark ? "bg-[#080F1B]" : "bg-slate-100"
-                }`}
-              >
-                <div className="absolute inset-0">
-                  <div className="absolute left-[10%] top-[10%] h-48 w-48 rounded-full bg-[#1D6FE8]/10 blur-[80px]" />
-                  <div className="absolute bottom-[5%] right-[5%] h-56 w-56 rounded-full bg-[#2F2E98]/15 blur-[90px]" />
-                </div>
-
-                {/* Browser */}
-                <div className="absolute left-[8%] top-[13%] w-[78%] rotate-[-4deg] rounded-2xl border border-[#23354D] bg-[#111C2B] p-3 shadow-2xl">
-                  <div className="flex items-center gap-1.5 border-b border-[#23354D] pb-3">
-                    <span className="h-2 w-2 rounded-full bg-[#23354D]" />
-                    <span className="h-2 w-2 rounded-full bg-[#23354D]" />
-                    <span className="h-2 w-2 rounded-full bg-[#23354D]" />
-                    <div className="ml-3 h-2 w-32 rounded-full bg-[#23354D]" />
-                  </div>
-
-                  <div className="grid grid-cols-[80px_1fr] gap-3 pt-3">
-                    <div className="rounded-lg bg-[#0B1220] p-2">
-                      <div className="mb-5 h-2 w-10 rounded bg-[#1D6FE8]/70" />
-
-                      {[1, 2, 3, 4, 5].map((item) => (
-                        <div
-                          key={item}
-                          className={`mb-3 h-2 rounded ${
-                            item === 1
-                              ? "w-12 bg-[#1D6FE8]/30"
-                              : "w-9 bg-[#23354D]"
-                          }`}
-                        />
-                      ))}
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between">
-                        <div>
-                          <div className="h-3 w-24 rounded bg-white/10" />
-                          <div className="mt-2 h-2 w-16 rounded bg-[#23354D]" />
-                        </div>
-
-                        <div className="h-6 w-16 rounded-lg bg-[#1D6FE8]/20" />
-                      </div>
-
-                      <div className="mt-4 grid grid-cols-3 gap-2">
-                        <div className="h-20 rounded-lg bg-[#1D6FE8]/10" />
-                        <div className="h-20 rounded-lg bg-white/5" />
-                        <div className="h-20 rounded-lg bg-white/5" />
-                      </div>
-
-                      <div className="mt-3 h-20 rounded-lg bg-white/5" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mobile App */}
-                <div className="absolute bottom-[7%] right-[5%] w-[35%] rotate-[7deg] rounded-[22px] border border-[#1D6FE8]/30 bg-[#111C2B] p-2 shadow-2xl">
-                  <div className="rounded-[16px] bg-[#0B1220] p-3">
-                    <div className="mx-auto h-1 w-10 rounded-full bg-[#23354D]" />
-                    <div className="mt-5 h-24 rounded-xl bg-[#1D6FE8]/10" />
-                    <div className="mt-3 h-3 w-20 rounded bg-white/10" />
-                    <div className="mt-2 h-2 w-14 rounded bg-[#23354D]" />
-                    <div className="mt-5 h-8 rounded-lg bg-[#1D6FE8]/30" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-6 left-6 rounded-xl border border-[#23354D] bg-[#111C2B]/90 px-4 py-3 backdrop-blur-xl">
-                  <p className="text-[9px] tracking-[0.2em] text-[#64748B]">
-                    B.SC. CSE FINAL-YEAR PROJECT
-                  </p>
-
-                  <p className="mt-1 text-xs font-semibold">
-                    EzzeWash Ecosystem
-                  </p>
+          {/* Featured Project: EzzeWash */}
+          <article className="overflow-hidden rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xl transition-all hover:border-[var(--primary-blue)]/50">
+            <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+              {/* Visual preview */}
+              <div className="relative min-h-[360px] overflow-hidden bg-[var(--bg-secondary)] p-6 sm:p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-[var(--border-color)]">
+                <div className="relative aspect-[16/9] w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-2xl">
+                  <Image
+                    src="/assets/projects/ezzewash/overview.svg"
+                    alt="EzzeWash Laundry Ecosystem Architecture Mockup"
+                    fill
+                    className="object-contain p-2"
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full border border-[#1D6FE8]/20 bg-[#1D6FE8]/5 px-3 py-1 text-[10px] font-semibold tracking-[0.15em] text-[#1D6FE8]">
-                    FLAGSHIP
-                  </span>
-
-                  <span className="text-xs text-[#64748B]">01 / 06</span>
-                </div>
-
-                <h3 className="mt-6 text-3xl font-bold">
-                  EzzeWash System
-                </h3>
-
-                <p className="mt-3 text-sm font-medium text-[#1D6FE8]">
-                  Full-Stack Laundry Service & Management Ecosystem
-                </p>
-
-                <p
-                  className={`mt-5 text-sm leading-7 ${
-                    dark ? "text-[#9AAEC4]" : "text-slate-500"
-                  }`}
-                >
-                  {projects[0].description}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {projects[0].technologies.map((technology) => (
-                    <span
-                      key={technology}
-                      className={`rounded-full border px-3 py-1.5 text-[10px] ${
-                        dark
-                          ? "border-[#23354D] bg-[#111C2B] text-[#9AAEC4]"
-                          : "border-slate-200 bg-slate-50 text-slate-500"
-                      }`}
-                    >
-                      {technology}
+              {/* Information */}
+              <div className="flex flex-col justify-between p-8 sm:p-10">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full border border-[var(--primary-blue)]/30 bg-[var(--primary-blue)]/10 px-3 py-1 text-[10px] font-bold tracking-widest text-[var(--primary-blue)]">
+                      FEATURED PROJECT
                     </span>
-                  ))}
+                    <span className="text-xs font-semibold text-[var(--text-secondary)]">
+                      01 / 06
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-3xl font-extrabold text-[var(--text-primary)]">
+                    {featuredProject.title}
+                  </h3>
+                  <p className="mt-1 text-sm font-semibold text-[var(--primary-blue)]">
+                    {featuredProject.subtitle}
+                  </p>
+
+                  <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {featuredProject.description}
+                  </p>
+
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {featuredProject.technologies.slice(0, 6).map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-2.5 py-1 text-[10px] font-medium text-[var(--text-secondary)]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-3 text-xs text-[var(--text-secondary)]">
+                    <span className="font-semibold text-[var(--primary-blue)]">
+                      Scope:{" "}
+                    </span>
+                    Customer App • Admin Control Center • Rider Logistics • Web Portal • Supabase Cloud
+                  </div>
                 </div>
 
-                <div className="mt-7 grid grid-cols-2 gap-2">
-                  {projects[0].details.map((detail) => (
-                    <div
-                      key={detail}
-                      className={`rounded-xl border px-3 py-3 text-xs ${
-                        dark
-                          ? "border-[#23354D] bg-[#111C2B]/60"
-                          : "border-slate-200 bg-slate-50"
-                      }`}
-                    >
-                      <span className="mr-2 text-[#1D6FE8]">+</span>
-                      {detail}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Link
-                    href="/projects/ezzewash"
-                    className="rounded-xl bg-[#1D6FE8] px-5 py-3 text-sm font-semibold text-white transition-all hover:shadow-[0_0_30px_rgba(29,111,232,0.3)]"
+                    href={`/projects/${featuredProject.id}`}
+                    className="rounded-xl bg-[var(--primary-blue)] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_25px_rgba(29,111,232,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_35px_rgba(29,111,232,0.45)]"
                   >
-                    Project Details →
+                    Project Case Study →
                   </Link>
 
                   <a
-                    href="https://github.com/ImranHasan13421"
+                    href="https://github.com/ImranHasan13421/EzzeWash_Laundry_Management-Admin-V1.0.2"
                     target="_blank"
-                    rel="noreferrer"
-                    className={`rounded-xl border px-5 py-3 text-sm font-semibold ${
-                      dark
-                        ? "border-[#23354D] bg-[#111C2B] hover:border-[#1D6FE8]"
-                        : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-                    }`}
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
                   >
-                    GitHub ↗
+                    Admin Code ↗
                   </a>
                 </div>
               </div>
             </div>
           </article>
 
-          {/* Other Projects */}
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {projects.slice(1).map((project) => (
+          {/* Other 5 Projects Grid */}
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {otherProjects.map((project) => (
               <article
                 key={project.id}
-                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-                  dark
-                    ? "border-[#23354D] bg-[#111C2B]/55 hover:border-[#1D6FE8]/40"
-                    : "border-slate-200 bg-white hover:border-[#1D6FE8]/40"
-                }`}
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--primary-blue)]"
               >
-                <div
-                  className={`relative h-36 overflow-hidden border-b ${
-                    dark
-                      ? "border-[#23354D] bg-[#080F1B]"
-                      : "border-slate-200 bg-slate-50"
-                  }`}
-                >
-                  <div className="absolute left-6 top-5 text-5xl font-bold text-[#1D6FE8]/10">
-                    {project.number}
-                  </div>
-
-                  <div className="absolute right-7 top-1/2 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-2xl border border-[#23354D] bg-[#111C2B]">
-                    <span className="text-xl text-[#1D6FE8]">✦</span>
-                  </div>
-
-                  <div className="absolute bottom-5 left-6">
-                    <p className="text-[9px] font-semibold tracking-[0.2em] text-[#1D6FE8]">
+                <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[var(--border-color)] bg-[var(--bg-secondary)]">
+                  <Image
+                    src={`/assets/projects/${project.id}/overview.svg`}
+                    alt={`${project.title} Mockup`}
+                    fill
+                    className="object-contain p-2"
+                  />
+                  <div className="absolute left-4 top-4">
+                    <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-card)]/90 px-3 py-1 text-[10px] font-bold tracking-wider text-[var(--primary-blue)] backdrop-blur-md">
                       {project.category}
-                    </p>
-
-                    <p className="mt-1 text-lg font-bold">{project.title}</p>
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-7">
-                  <h3 className="text-xl font-semibold">
-                    {project.subtitle}
-                  </h3>
-
-                  <p
-                    className={`mt-4 text-sm leading-6 ${
-                      dark ? "text-[#9AAEC4]" : "text-slate-500"
-                    }`}
-                  >
-                    {project.description}
-                  </p>
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.technologies.map((technology) => (
-                      <span
-                        key={technology}
-                        className={`rounded-full border px-3 py-1 text-[10px] ${
-                          dark
-                            ? "border-[#23354D] text-[#9AAEC4]"
-                            : "border-slate-200 text-slate-500"
-                        }`}
-                      >
-                        {technology}
+                <div className="flex flex-1 flex-col justify-between p-7">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-bold text-[var(--text-primary)]">
+                        {project.title}
+                      </h3>
+                      <span className="text-xs font-bold text-[var(--primary-blue)]">
+                        {project.number}
                       </span>
-                    ))}
+                    </div>
+
+                    <p className="mt-1 text-xs font-semibold text-[var(--primary-blue)]">
+                      {project.subtitle}
+                    </p>
+
+                    <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+                      {project.description}
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-2.5 py-0.5 text-[10px] font-medium text-[var(--text-secondary)]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="mt-7 flex items-center gap-3">
+                  <div className="mt-6 flex items-center gap-3 pt-4 border-t border-[var(--border-color)]">
                     <Link
                       href={`/projects/${project.id}`}
-                      className="rounded-xl bg-[#1D6FE8] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:shadow-[0_0_25px_rgba(29,111,232,0.25)]"
+                      className="rounded-xl bg-[var(--primary-blue)] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:shadow-[0_0_20px_rgba(29,111,232,0.3)]"
                     >
                       View Details →
                     </Link>
@@ -1075,12 +736,8 @@ export default function Home() {
                     <a
                       href={project.github}
                       target="_blank"
-                      rel="noreferrer"
-                      className={`rounded-xl border px-4 py-2.5 text-xs font-semibold ${
-                        dark
-                          ? "border-[#23354D] bg-[#0B1220] hover:border-[#1D6FE8]"
-                          : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-                      }`}
+                      rel="noopener noreferrer"
+                      className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] px-4 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
                     >
                       GitHub ↗
                     </a>
@@ -1089,79 +746,41 @@ export default function Home() {
               </article>
             ))}
           </div>
-
-          <div
-            className={`mt-4 flex flex-col justify-between gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center ${
-              dark
-                ? "border-[#23354D] bg-[#0B1220]/70"
-                : "border-slate-200 bg-white"
-            }`}
-          >
-            <div>
-              <p className="text-sm font-semibold">
-                More work is available on GitHub.
-              </p>
-
-              <p
-                className={`mt-1 text-xs ${
-                  dark ? "text-[#64748B]" : "text-slate-400"
-                }`}
-              >
-                Explore repositories, experiments, and ongoing projects.
-              </p>
-            </div>
-
-            <a
-              href="https://github.com/ImranHasan13421?tab=repositories"
-              target="_blank"
-              rel="noreferrer"
-              className={`rounded-xl border px-5 py-3 text-xs font-semibold ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B] hover:border-[#1D6FE8]"
-                  : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-              }`}
-            >
-              Browse Repositories ↗
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* Journey */}
+      {/* Journey Section */}
       <section
         id="journey"
-        className={`border-t px-6 py-28 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
+        className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-14">
-            <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-[#1D6FE8]">
-              JOURNEY
+            <p className="text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)]">
+              JOURNEY &amp; MILESTONES
             </p>
-
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              From learning to
-              <span className="block text-[#1D6FE8]">building.</span>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl text-[var(--text-primary)]">
+              From learning to building.
             </h2>
+            <p className="mt-3 text-sm text-[var(--text-secondary)]">
+              The path from university fundamentals to building production software.
+            </p>
           </div>
 
-          <div className="relative ml-2 border-l border-[#23354D]">
+          <div className="relative ml-2 border-l-2 border-[var(--border-color)]">
             {journey.map((item) => (
               <div key={item.title} className="relative pb-12 pl-8 last:pb-0">
-                <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[#1D6FE8] shadow-[0_0_15px_rgba(29,111,232,0.7)]" />
+                <span className="absolute -left-[7px] top-1 h-3 w-3 rounded-full bg-[var(--primary-blue)] shadow-[0_0_15px_rgba(29,111,232,0.8)]" />
 
-                <p className="text-xs font-semibold tracking-[0.2em] text-[#1D6FE8]">
+                <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
                   {item.period}
                 </p>
 
-                <h3 className="mt-3 text-xl font-semibold">{item.title}</h3>
+                <h3 className="mt-2 text-xl font-bold text-[var(--text-primary)]">
+                  {item.title}
+                </h3>
 
-                <p
-                  className={`mt-2 max-w-2xl text-sm leading-6 ${
-                    dark ? "text-[#9AAEC4]" : "text-slate-500"
-                  }`}
-                >
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
                   {item.description}
                 </p>
               </div>
@@ -1170,91 +789,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* Contact Section */}
       <section
         id="contact"
-        className={`border-t px-6 py-28 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
+        className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
       >
-        <div
-          className={`mx-auto max-w-6xl overflow-hidden rounded-3xl border p-8 text-center sm:p-14 ${
-            dark
-              ? "border-[#23354D] bg-[#0B1220]"
-              : "border-slate-200 bg-white"
-          }`}
-        >
-          <p className="text-xs font-semibold tracking-[0.3em] text-[#1D6FE8]">
-            CONTACT
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 text-center sm:p-14 shadow-xl">
+          <p className="text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)]">
+            CONTACT &amp; COLLABORATION
           </p>
 
-          <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-2xl text-4xl font-extrabold tracking-tight sm:text-5xl text-[var(--text-primary)]">
             Let&apos;s build something
-            <span className="block text-[#1D6FE8]">useful together.</span>
+            <span className="block text-[var(--primary-blue)]">practical together.</span>
           </h2>
 
-          <p
-            className={`mx-auto mt-5 max-w-xl text-sm leading-7 ${
-              dark ? "text-[#9AAEC4]" : "text-slate-500"
-            }`}
-          >
-            Have an idea, project, collaboration, or simply want to connect?
-            Feel free to reach out.
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[var(--text-secondary)]">
+            Have an idea, project, or opportunity? Let&apos;s talk about it.
+            You can inspect my work, contribute, or reach out through GitHub.
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="mailto:hello@example.com"
-              className="rounded-xl bg-[#1D6FE8] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(29,111,232,0.2)] transition-all hover:shadow-[0_0_40px_rgba(29,111,232,0.35)]"
-            >
-              Get in Touch →
-            </a>
-
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-3">
             <a
               href="https://github.com/ImranHasan13421"
               target="_blank"
-              rel="noreferrer"
-              className={`rounded-xl border px-6 py-3.5 text-sm font-semibold ${
-                dark
-                  ? "border-[#23354D] bg-[#111C2B] hover:border-[#1D6FE8]"
-                  : "border-slate-200 bg-white hover:border-[#1D6FE8]"
-              }`}
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary-blue)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(29,111,232,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(29,111,232,0.4)]"
             >
-              GitHub ↗
+              <span>Connect on GitHub</span>
+              <span>↗</span>
+            </a>
+
+            <a
+              href="https://github.com/ImranHasan13421?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] px-6 py-3.5 text-sm font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)]"
+            >
+              Browse Repositories
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer
-        className={`border-t px-6 py-8 sm:px-10 lg:px-16 ${
-          dark ? "border-[#23354D]/70" : "border-slate-200"
-        }`}
-      >
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-xs sm:flex-row sm:items-center">
+      <footer className="border-t border-[var(--border-color)] px-6 py-10 sm:px-10 lg:px-16">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 text-xs sm:flex-row sm:items-center">
           <div>
-            <p className="font-semibold">MD. Imran Hasan</p>
-
-            <p
-              className={`mt-1 ${
-                dark ? "text-[#64748B]" : "text-slate-400"
-              }`}
-            >
-              Software Developer • Flutter • UI/UX
+            <p className="font-bold text-sm text-[var(--text-primary)]">MD. Imran Hasan</p>
+            <p className="mt-1 text-[var(--text-secondary)]">
+              Software Developer • Flutter • UI/UX • Product Development
             </p>
           </div>
 
-          <p className={dark ? "text-[#64748B]" : "text-slate-400"}>
+          <div className="flex flex-wrap items-center gap-5 font-medium text-[var(--text-secondary)]">
+            <a
+              href="https://github.com/ImranHasan13421"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--text-primary)]"
+            >
+              GitHub
+            </a>
+            <a href="#projects" className="hover:text-[var(--text-primary)]">
+              Projects
+            </a>
+            <a href="#contact" className="hover:text-[var(--text-primary)]">
+              Contact
+            </a>
+            <a
+              href="#home"
+              className="font-semibold text-[var(--primary-blue)] hover:underline"
+            >
+              Back to top ↑
+            </a>
+          </div>
+
+          <p className="text-[var(--text-secondary)]">
             © {new Date().getFullYear()} MD. Imran Hasan. All rights reserved.
           </p>
-
-          <a
-            href="#home"
-            className="text-[#1D6FE8] transition-opacity hover:opacity-70"
-          >
-            Back to top ↑
-          </a>
         </div>
       </footer>
     </main>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="ecBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050A12"/>
+      <stop offset="100%" stop-color="#080F1E"/>
+    </linearGradient>
+    <linearGradient id="ecCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111C2B"/>
+      <stop offset="100%" stop-color="#0B1320"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#ecBg)"/>
+
+  <!-- Top Banner -->
+  <rect x="40" y="30" width="880" height="46" rx="12" fill="#111C2B" stroke="#23354D" stroke-width="1.5"/>
+  <circle cx="65" cy="53" r="6" fill="#1D6FE8"/>
+  <text x="85" y="58" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#F5F9FF" letter-spacing="1.5">EZZECV — OFFLINE CV BUILDER &amp; LIVE PDF GENERATION</text>
+  <text x="895" y="57" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9AAEC4" text-anchor="end">BUILDER ARCHITECTURE MOCKUP</text>
+
+  <!-- Left: Resume Canvas Preview -->
+  <g transform="translate(40, 100)">
+    <rect width="440" height="340" rx="16" fill="url(#ecCard)" stroke="#1D6FE8" stroke-width="1.5"/>
+    <rect x="20" y="20" width="400" height="36" rx="8" fill="#162438"/>
+    <text x="36" y="42" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F5F9FF">LIVE ATS RESUME CANVAS &amp; VECTOR PDF ENGINE</text>
+
+    <!-- Simulated Document Sheet -->
+    <g transform="translate(70, 75)">
+      <rect width="300" height="235" rx="8" fill="#0B1220" stroke="#23354D" stroke-width="1.5"/>
+      <!-- Header bar inside doc -->
+      <rect x="20" y="20" width="80" height="12" rx="3" fill="#1D6FE8"/>
+      <rect x="20" y="38" width="140" height="7" rx="2" fill="#9AAEC4" fill-opacity="0.5"/>
+      <line x1="20" y1="55" x2="280" y2="55" stroke="#23354D" stroke-width="1"/>
+
+      <!-- Sections inside doc -->
+      <g transform="translate(20, 68)">
+        <rect width="60" height="8" rx="2" fill="#3B82F6"/>
+        <rect y="14" width="260" height="5" rx="2" fill="#23354D"/>
+        <rect y="24" width="220" height="5" rx="2" fill="#23354D"/>
+        <rect y="34" width="240" height="5" rx="2" fill="#23354D"/>
+
+        <rect y="52" width="70" height="8" rx="2" fill="#3B82F6"/>
+        <rect y="66" width="260" height="5" rx="2" fill="#23354D"/>
+        <rect y="76" width="200" height="5" rx="2" fill="#23354D"/>
+
+        <rect y="94" width="55" height="8" rx="2" fill="#3B82F6"/>
+        <rect y="108" width="260" height="5" rx="2" fill="#23354D"/>
+        <rect y="118" width="180" height="5" rx="2" fill="#23354D"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right: Technical Capabilities -->
+  <g transform="translate(500, 100)">
+    <rect width="420" height="340" rx="16" fill="url(#ecCard)" stroke="#23354D" stroke-width="1.5"/>
+    <rect x="20" y="20" width="380" height="36" rx="8" fill="#162438"/>
+    <text x="36" y="42" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#1D6FE8">DOCUMENT ENGINE FEATURES</text>
+
+    <g transform="translate(20, 75)">
+      <rect width="380" height="50" rx="10" fill="#0B1220" stroke="#23354D" stroke-width="1"/>
+      <text x="16" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#F5F9FF">5 ATS-Compliant Templates</text>
+      <text x="16" y="38" font-family="system-ui, sans-serif" font-size="9.5" fill="#9AAEC4">Carefully structured typography for Applicant Tracking Systems</text>
+
+      <rect y="58" width="380" height="50" rx="10" fill="#0B1220" stroke="#23354D" stroke-width="1"/>
+      <text x="16" y="80" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#F5F9FF">Real-Time Vector PDF Generation</text>
+      <text x="16" y="96" font-family="system-ui, sans-serif" font-size="9.5" fill="#9AAEC4">Crisp, print-ready document rendering on device</text>
+
+      <rect y="116" width="380" height="50" rx="10" fill="#0B1220" stroke="#23354D" stroke-width="1"/>
+      <text x="16" y="138" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#F5F9FF">JSON Backup &amp; Restore</text>
+      <text x="16" y="154" font-family="system-ui, sans-serif" font-size="9.5" fill="#9AAEC4">Zero lock-in with portable file import and export</text>
+
+      <rect y="174" width="380" height="58" rx="10" fill="#162438" stroke="#1D6FE8" stroke-width="1"/>
+      <text x="16" y="198" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#60A5FA">Bilingual UI &amp; Image Cropping</text>
+      <text x="16" y="216" font-family="system-ui, sans-serif" font-size="9.5" fill="#9AAEC4">Full English &amp; Bengali interface with photo crop tools</text>
+    </g>
+  </g>
+
+  <!-- Bottom Bar -->
+  <g transform="translate(40, 465)">
+    <rect width="880" height="45" rx="10" fill="#0B1220" stroke="#23354D" stroke-width="1"/>
+    <text x="20" y="27" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9AAEC4">
+      Core Tech: <tspan fill="#F5F9FF">Flutter • Dart • Provider • PDF &amp; Printing Engine • Image Cropper • Local Storage</tspan>
+    </text>
+  </g>
+</svg>

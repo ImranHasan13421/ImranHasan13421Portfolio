@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D6FE8"/>
+      <stop offset="100%" stop-color="#2F2E98"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="16" width="48" height="48" rx="14" fill="url(#logoBg)"/>
+  <rect x="10" y="16" width="48" height="48" rx="14" fill="none" stroke="#23354D" stroke-width="1.5"/>
+  <text x="34" y="48" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF" text-anchor="middle">IH</text>
+  <text x="74" y="40" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#F5F9FF" letter-spacing="0.5">MD. IMRAN HASAN</text>
+  <text x="74" y="56" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#1D6FE8" letter-spacing="2">SOFTWARE DEVELOPER</text>
+</svg>
