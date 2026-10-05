@@ -3,45 +3,69 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import LiveTechVisual from "./components/LiveTechVisual";
+import PlexusBackground from "./components/PlexusBackground";
 import ThemeToggle from "./components/ThemeToggle";
 import { projectsData } from "./data/projects";
+
+const heroChips = [
+  { name: "Flutter", icon: "/assets/icons/flutter.svg" },
+  { name: "Dart", icon: "/assets/icons/dart.svg" },
+  { name: "UI/UX", icon: "/assets/icons/figma.svg" },
+  { name: "Supabase", icon: "/assets/icons/supabase.svg" },
+  { name: "Git", icon: "/assets/icons/github.svg" },
+  { name: "Android", icon: "/assets/icons/android.svg" },
+];
 
 const skills = [
   {
     title: "Flutter",
     category: "Primary Framework",
-    description: "Cross-platform mobile application development with responsive widgets and custom painters.",
+    icon: "/assets/icons/flutter.svg",
+    description: "Cross-platform mobile application development with responsive widgets, custom animations, and clean state.",
     level: "Primary",
   },
   {
     title: "Dart",
     category: "Language & Architecture",
-    description: "Application logic, state management with BLoC/Provider, streams, and clean architecture.",
+    icon: "/assets/icons/dart.svg",
+    description: "Application logic, state management with BLoC/Provider, reactive streams, and clean layered architecture.",
     level: "Primary",
   },
   {
     title: "UI / UX",
-    category: "Product Design",
-    description: "Modern interfaces, visual hierarchy, user journey mapping, and micro-interactions.",
+    category: "Product Experience",
+    icon: "/assets/icons/figma.svg",
+    description: "Modern interfaces, visual hierarchy, user journey mapping, tactile micro-interactions, and accessible layouts.",
     level: "Core Focus",
   },
   {
     title: "Figma",
     category: "Design Systems",
-    description: "Design systems, layout wireframing, high-fidelity prototypes, and component libraries.",
+    icon: "/assets/icons/figma.svg",
+    description: "Interface exploration, design systems, vector assets, layout wireframing, and interactive prototypes.",
     level: "Design",
   },
   {
     title: "Supabase",
     category: "Backend & Cloud",
-    description: "Relational PostgreSQL databases, Row Level Security, Realtime subscriptions, Auth, and Storage.",
+    icon: "/assets/icons/supabase.svg",
+    description: "Relational PostgreSQL database schemas, Row Level Security, Realtime subscriptions, Auth, and Storage.",
     level: "Backend",
   },
   {
     title: "Git & GitHub",
     category: "Version Control",
-    description: "Branching strategies, collaborative workflows, code versioning, and documentation.",
+    icon: "/assets/icons/github.svg",
+    description: "Collaborative workflows, branching strategies, code versioning, commit hygiene, and repository documentation.",
     level: "Workflow",
+  },
+  {
+    title: "Android & Studio",
+    category: "Platform & Tooling",
+    icon: "/assets/icons/androidstudio.svg",
+    description: "Android SDK tooling, Gradle build configurations, physical device debugging, and APK deployment.",
+    level: "Platform",
   },
 ];
 
@@ -122,7 +146,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+    <main className="relative min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* Interactive Plexus Canvas Background */}
+      <PlexusBackground />
+
       {/* Ambient background glows */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[8%] top-[5%] h-[450px] w-[450px] rounded-full bg-[#1D6FE8]/10 blur-[140px]" />
@@ -182,6 +209,13 @@ export default function Home() {
               rel="noopener noreferrer"
               className="hidden rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)] sm:inline-flex items-center gap-1.5"
             >
+              <Image
+                src="/assets/icons/github.svg"
+                alt="GitHub"
+                width={14}
+                height={14}
+                className="h-3.5 w-3.5 rounded-sm object-contain"
+              />
               <span>GitHub</span>
               <span className="text-[11px] text-[var(--primary-blue)]">↗</span>
             </a>
@@ -222,9 +256,7 @@ export default function Home() {
               onClick={() => setMobileMenu(false)}
               className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
             />
-            <div
-              className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 shadow-2xl md:hidden"
-            >
+            <div className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 shadow-2xl md:hidden">
               <div className="flex flex-col gap-4">
                 {["About", "Skills", "Projects", "Journey", "Contact"].map((item) => (
                   <a
@@ -241,9 +273,16 @@ export default function Home() {
                     href="https://github.com/ImranHasan13421"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-semibold text-[var(--primary-blue)]"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--primary-blue)]"
                   >
-                    GitHub Profile ↗
+                    <Image
+                      src="/assets/icons/github.svg"
+                      alt="GitHub"
+                      width={16}
+                      height={16}
+                      className="h-4 w-4 rounded-sm object-contain"
+                    />
+                    <span>GitHub Profile ↗</span>
                   </a>
                   <span className="text-xs text-[var(--text-secondary)]">MD. Imran Hasan</span>
                 </div>
@@ -302,83 +341,43 @@ export default function Home() {
                 href="https://github.com/ImranHasan13421"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-6 py-3.5 text-sm font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)] hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-6 py-3.5 text-sm font-semibold text-[var(--text-primary)] transition-all hover:border-[var(--primary-blue)] hover:-translate-y-0.5"
               >
-                GitHub Profile ↗
+                <Image
+                  src="/assets/icons/github.svg"
+                  alt="GitHub"
+                  width={18}
+                  height={18}
+                  className="h-4.5 w-4.5 rounded-sm object-contain"
+                />
+                <span>GitHub Profile ↗</span>
               </a>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-2">
-              {["Flutter", "Dart", "UI/UX", "Supabase", "Git"].map((tech) => (
+            {/* Hero Tech Chips with Official Rounded Icons */}
+            <div className="mt-10 flex flex-wrap gap-2.5">
+              {heroChips.map((tech) => (
                 <span
-                  key={tech}
-                  className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3.5 py-1 text-xs font-medium text-[var(--text-secondary)]"
+                  key={tech.name}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text-secondary)] shadow-sm transition-all hover:border-[var(--primary-blue)] hover:text-[var(--text-primary)]"
                 >
-                  {tech}
+                  <div className="flex h-5 w-5 items-center justify-center rounded-md bg-[var(--bg-card)] p-0.5 shadow-xs">
+                    <Image
+                      src={tech.icon}
+                      alt={tech.name}
+                      width={16}
+                      height={16}
+                      className="h-3.5 w-3.5 rounded-xs object-contain"
+                    />
+                  </div>
+                  <span>{tech.name}</span>
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Hero Technical Visual (Circular geometry, nodes, SVG network) */}
-          <div className="relative mx-auto hidden h-[460px] w-full max-w-[460px] lg:block">
-            {/* Outer geometry */}
-            <div className="absolute inset-4 rounded-full border border-[var(--border-color)]/70 tech-orbit" />
-            <div className="absolute inset-16 rounded-full border border-dashed border-[var(--primary-blue)]/30 tech-orbit-reverse" />
-            <div className="absolute inset-28 rounded-full border border-[var(--border-color)]/40" />
-
-            {/* Central Monogram */}
-            <div className="absolute left-1/2 top-1/2 flex h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[32px] border border-[var(--primary-blue)]/50 bg-[var(--bg-card)] shadow-[0_0_60px_rgba(29,111,232,0.25)] backdrop-blur-xl">
-              <div className="text-center">
-                <div className="text-3xl font-extrabold text-[var(--primary-blue)] tracking-wider">
-                  IH
-                </div>
-                <div className="mt-1 text-[9px] font-bold tracking-[0.25em] text-[var(--text-secondary)]">
-                  PRODUCT
-                </div>
-              </div>
-            </div>
-
-            {/* Orbiting Tech Labels */}
-            {[
-              { label: "FLUTTER", pos: "top-[6%] left-1/2 -translate-x-1/2" },
-              { label: "UI / UX", pos: "right-[2%] top-1/2 -translate-y-1/2" },
-              { label: "PRODUCT", pos: "bottom-[6%] left-1/2 -translate-x-1/2" },
-              { label: "CODE", pos: "left-[2%] top-1/2 -translate-y-1/2" },
-            ].map(({ label, pos }) => (
-              <div
-                key={label}
-                className={`absolute ${pos} rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)]/90 px-3.5 py-1.5 text-[10px] font-bold tracking-[0.2em] text-[var(--text-primary)] shadow-md backdrop-blur-md`}
-              >
-                {label}
-              </div>
-            ))}
-
-            {/* Glowing Nodes */}
-            <div className="absolute left-[18%] top-[22%] h-2.5 w-2.5 rounded-full bg-[#1D6FE8] shadow-[0_0_20px_#1D6FE8] tech-node" />
-            <div className="absolute right-[20%] top-[26%] h-2 w-2 rounded-full bg-[#6D6BFF] shadow-[0_0_18px_#6D6BFF] tech-node" />
-            <div className="absolute bottom-[24%] left-[18%] h-2 w-2 rounded-full bg-[#1D6FE8] shadow-[0_0_18px_#1D6FE8] tech-node" />
-            <div className="absolute bottom-[20%] right-[22%] h-2.5 w-2.5 rounded-full bg-[#6D6BFF] shadow-[0_0_20px_#6D6BFF] tech-node" />
-
-            {/* SVG Network Lines */}
-            <svg
-              className="absolute inset-0 h-full w-full opacity-35"
-              viewBox="0 0 460 460"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M110 110 L230 170 L350 130 M110 110 L130 230 L230 290 M350 130 L330 240 L230 290 M130 230 L230 170 L330 240"
-                stroke="#1D6FE8"
-                strokeWidth="1.2"
-              />
-              <circle cx="110" cy="110" r="4" fill="#1D6FE8" />
-              <circle cx="350" cy="130" r="4" fill="#6D6BFF" />
-              <circle cx="130" cy="230" r="4" fill="#1D6FE8" />
-              <circle cx="330" cy="240" r="4" fill="#6D6BFF" />
-              <circle cx="230" cy="290" r="4" fill="#1D6FE8" />
-            </svg>
-          </div>
+          {/* Live Dynamic Technical Visual (Interactive with moving connected lines) */}
+          <LiveTechVisual />
         </div>
 
         {/* Scroll indicator */}
@@ -498,7 +497,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Skills Section with Official Rounded Icons */}
       <section
         id="skills"
         className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
@@ -532,22 +531,34 @@ export default function Home() {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-[var(--text-primary)]">
-                        {skill.title}
-                      </h3>
-                      <p className="text-xs font-semibold text-[var(--primary-blue)]">
-                        {skill.category}
-                      </p>
-                      <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
-                        {skill.description}
-                      </p>
+                    <div className="flex items-start gap-3.5">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-2.5 shadow-sm transition-transform group-hover:scale-105">
+                        <Image
+                          src={skill.icon}
+                          alt={skill.title}
+                          width={28}
+                          height={28}
+                          className="h-7 w-7 rounded-sm object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-[var(--text-primary)]">
+                          {skill.title}
+                        </h3>
+                        <p className="text-xs font-semibold text-[var(--primary-blue)]">
+                          {skill.category}
+                        </p>
+                      </div>
                     </div>
 
                     <span className="text-[var(--primary-blue)] transition-transform group-hover:translate-x-1">
                       ↗
                     </span>
                   </div>
+
+                  <p className="mt-4 text-xs leading-relaxed text-[var(--text-secondary)]">
+                    {skill.description}
+                  </p>
 
                   <div className="mt-6 flex items-center justify-between border-t border-[var(--border-color)] pt-4">
                     <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-2.5 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]">
@@ -564,7 +575,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Projects Section with Official Rounded Logos */}
       <section
         id="projects"
         className="border-t border-[var(--border-color)] px-6 py-28 sm:px-10 lg:px-16"
@@ -618,16 +629,31 @@ export default function Home() {
                       FEATURED PROJECT
                     </span>
                     <span className="text-xs font-semibold text-[var(--text-secondary)]">
-                      01 / 06
+                      01 / 07
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-3xl font-extrabold text-[var(--text-primary)]">
-                    {featuredProject.title}
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold text-[var(--primary-blue)]">
-                    {featuredProject.subtitle}
-                  </p>
+                  <div className="mt-4 flex items-center gap-4">
+                    {featuredProject.logoUrl && (
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-1.5 shadow-md">
+                        <Image
+                          src={featuredProject.logoUrl}
+                          alt="EzzeWash Logo"
+                          width={44}
+                          height={44}
+                          className="h-11 w-11 rounded-xl object-contain"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-3xl font-extrabold text-[var(--text-primary)]">
+                        {featuredProject.title}
+                      </h3>
+                      <p className="text-xs font-semibold text-[var(--primary-blue)]">
+                        {featuredProject.subtitle}
+                      </p>
+                    </div>
+                  </div>
 
                   <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
                     {featuredProject.description}
@@ -664,16 +690,23 @@ export default function Home() {
                     href="https://github.com/ImranHasan13421/EzzeWash_Laundry_Management-Admin-V1.0.2"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
                   >
-                    Admin Code ↗
+                    <Image
+                      src="/assets/icons/github.svg"
+                      alt="GitHub"
+                      width={14}
+                      height={14}
+                      className="h-3.5 w-3.5 rounded-sm object-contain"
+                    />
+                    <span>Admin Code ↗</span>
                   </a>
                 </div>
               </div>
             </div>
           </article>
 
-          {/* Other 5 Projects Grid */}
+          {/* All Other Projects Grid (ATLANTA, EzzeMusic, EzzeCV, EzzeExpense, ShEC CSE, EzzeWatchList) */}
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {otherProjects.map((project) => (
               <article
@@ -696,20 +729,34 @@ export default function Home() {
 
                 <div className="flex flex-1 flex-col justify-between p-7">
                   <div>
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                        {project.title}
-                      </h3>
-                      <span className="text-xs font-bold text-[var(--primary-blue)]">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        {project.logoUrl && (
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-1.5 shadow-sm transition-transform group-hover:scale-105">
+                            <Image
+                              src={project.logoUrl}
+                              alt={`${project.title} Logo`}
+                              width={36}
+                              height={36}
+                              className="h-9 w-9 rounded-lg object-contain"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <h3 className="text-xl font-bold text-[var(--text-primary)]">
+                            {project.title}
+                          </h3>
+                          <p className="text-xs font-semibold text-[var(--primary-blue)]">
+                            {project.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-bold text-[var(--primary-blue)] shrink-0">
                         {project.number}
                       </span>
                     </div>
 
-                    <p className="mt-1 text-xs font-semibold text-[var(--primary-blue)]">
-                      {project.subtitle}
-                    </p>
-
-                    <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+                    <p className="mt-4 text-xs leading-relaxed text-[var(--text-secondary)]">
                       {project.description}
                     </p>
 
@@ -737,9 +784,16 @@ export default function Home() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] px-4 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] px-4 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary-blue)]"
                     >
-                      GitHub ↗
+                      <Image
+                        src="/assets/icons/github.svg"
+                        alt="GitHub"
+                        width={13}
+                        height={13}
+                        className="h-3 w-3 rounded-xs object-contain"
+                      />
+                      <span>GitHub ↗</span>
                     </a>
                   </div>
                 </div>
@@ -816,6 +870,13 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary-blue)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(29,111,232,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(29,111,232,0.4)]"
             >
+              <Image
+                src="/assets/icons/github.svg"
+                alt="GitHub"
+                width={18}
+                height={18}
+                className="h-4.5 w-4.5 rounded-sm object-contain invert dark:invert-0"
+              />
               <span>Connect on GitHub</span>
               <span>↗</span>
             </a>
@@ -847,9 +908,16 @@ export default function Home() {
               href="https://github.com/ImranHasan13421"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--text-primary)]"
+              className="inline-flex items-center gap-1.5 hover:text-[var(--text-primary)]"
             >
-              GitHub
+              <Image
+                src="/assets/icons/github.svg"
+                alt="GitHub"
+                width={14}
+                height={14}
+                className="h-3.5 w-3.5 rounded-sm object-contain"
+              />
+              <span>GitHub</span>
             </a>
             <a href="#projects" className="hover:text-[var(--text-primary)]">
               Projects

@@ -10,6 +10,7 @@ export interface EcosystemComponent {
   role: string;
   description: string;
   highlights: string[];
+  logoUrl?: string;
 }
 
 export interface ProjectSection {
@@ -30,6 +31,7 @@ export interface Project {
   features: string[];
   sections: ProjectSection[];
   github: string;
+  logoUrl?: string;
   repositories: RepositoryLink[];
   disclaimer?: string;
   ecosystemComponents?: EcosystemComponent[];
@@ -67,6 +69,7 @@ export const projectsData: Record<string, Project> = {
       "Push Notifications",
       "GPS Tracking",
     ],
+    logoUrl: "/assets/projects/ezzewash/logo.webp",
     disclaimer:
       "EzzeWash was developed as a collaborative final-year CSE project. My portfolio focuses on the parts of the system, product development, implementation, architecture, and integration that I contributed to.",
     ecosystemComponents: [
@@ -80,6 +83,7 @@ export const projectsData: Record<string, Project> = {
           "Live order lifecycle updates and push notifications",
           "Profile, address book, and order history",
         ],
+        logoUrl: "/assets/projects/ezzewash/logo.webp",
       },
       {
         name: "Admin Control Center",
@@ -91,6 +95,7 @@ export const projectsData: Record<string, Project> = {
           "Service pricing, branch, and category management",
           "Revenue analytics, reports, and delivery oversight",
         ],
+        logoUrl: "/assets/projects/ezzewash/admin-logo.webp",
       },
       {
         name: "Rider Mobile App",
@@ -102,6 +107,7 @@ export const projectsData: Record<string, Project> = {
           "Order status transitions (Picked up, At Laundry, Out for Delivery, Completed)",
           "Cash management and delivery confirmation",
         ],
+        logoUrl: "/assets/projects/ezzewash/rider-logo.webp",
       },
       {
         name: "Promotional & Service Website",
@@ -113,6 +119,7 @@ export const projectsData: Record<string, Project> = {
           "Multi-step interactive laundry order wizard",
           "Promotional coupon validator and virtual chatbot simulation",
         ],
+        logoUrl: "/assets/projects/ezzewash/logo.webp",
       },
     ],
     sections: [
@@ -201,6 +208,7 @@ export const projectsData: Record<string, Project> = {
       "Connected Devices",
       "Audio Processing",
     ],
+    logoUrl: "/assets/projects/atlanta/logo.webp",
     sections: [
       {
         title: "Product Concept",
@@ -260,6 +268,7 @@ export const projectsData: Record<string, Project> = {
       "Glassmorphism",
       "Audio Service",
     ],
+    logoUrl: "/assets/projects/ezzemusic/logo.webp",
     sections: [
       {
         title: "The Problem with Generic Offline Players",
@@ -319,6 +328,7 @@ export const projectsData: Record<string, Project> = {
       "Image Cropping",
       "Local Storage",
     ],
+    logoUrl: "/assets/projects/ezzecv/logo.webp",
     sections: [
       {
         title: "Product Philosophy: Privacy & Zero Lock-in",
@@ -377,6 +387,7 @@ export const projectsData: Record<string, Project> = {
       "Data Visualization",
       "FL Chart",
     ],
+    logoUrl: "/assets/projects/ezzeexpense/logo.webp",
     sections: [
       {
         title: "Practical Finance Without Complexity",
@@ -437,6 +448,7 @@ export const projectsData: Record<string, Project> = {
       "Realtime Messaging",
       "Image Processing",
     ],
+    logoUrl: "/assets/projects/shec-cse/logo.png",
     sections: [
       {
         title: "Origin & Purpose",
@@ -474,6 +486,67 @@ export const projectsData: Record<string, Project> = {
       backend: ["Supabase", "PostgreSQL", "Realtime"],
       stateManagement: ["Provider"],
       storage: ["Supabase Cloud Storage", "Cached Network Images"],
+    },
+  },
+
+  ezzewatchlist: {
+    id: "ezzewatchlist",
+    number: "07",
+    category: "ENTERTAINMENT & TRACKING",
+    title: "EzzeWatchList",
+    subtitle: "Personal Movie & Series Watchlist Tracker",
+    description:
+      "A premium, highly polished personal movie & series watchlist tracker built with Flutter and Dart. Features a tabbed media library, comprehensive entry with posters and ratings, offline SQLite storage, and deep viewing statistics.",
+    longOverview:
+      "EzzeWatchList empowers cinephiles to track movies, series, and anime with a luxurious, distraction-free interface. Moving beyond sluggish online trackers, EzzeWatchList stores all ratings, watch dates, and poster assets locally on-device via SQLite, offering fluid hero transitions, intelligent category filtering, and personal runtime analytics.",
+    technologies: [
+      "Flutter",
+      "Dart",
+      "SQLite",
+      "Provider",
+      "Image Picker",
+      "SharedPreferences",
+      "Statistics Engine",
+    ],
+    logoUrl: "/assets/projects/ezzewatchlist/logo.webp",
+    sections: [
+      {
+        title: "Product Vision: Cinematic Personal Library",
+        text: "Many watchlist trackers are bloated with social feeds or require constant internet connectivity. EzzeWatchList is engineered as a private, high-fidelity digital logbook—organizing media into Watched, Watching, and Planned tabs with instantaneous search and custom ratings.",
+      },
+      {
+        title: "Architecture & Local SQLite Database",
+        text: "Built on Flutter with Provider state management and an optimized on-device SQLite database schema. It supports episode progression logging, poster caching, custom genre tags, and fast SQL indexing.",
+      },
+      {
+        title: "Viewing Insights & Future Cloud Roadmap",
+        text: "Equipped with personalized statistics tracking total watch hours, rating distributions, and genre breakdowns. The architecture includes a planned two-way sync bridge to Supabase Cloud for optional multi-device backup.",
+      },
+    ],
+    features: [
+      "Dynamic library with Watched, Watching & Planned tabs",
+      "Comprehensive show entry with poster image picker",
+      "Detailed view with fluid Hero-animated poster headers",
+      "Real-time smart search and multi-genre filtering",
+      "Runtime analytics, average ratings, and genre metrics",
+      "Persistent Dark & Light theme switching",
+      "On-device SQLite (sqflite) database persistence",
+      "Planned Supabase cloud synchronization architecture",
+    ],
+    github: "https://github.com/ImranHasan13421/EzzeWatchList",
+    repositories: [
+      {
+        title: "EzzeWatchList Repository",
+        description:
+          "Complete Flutter application repository with SQLite database and Provider modules.",
+        url: "https://github.com/ImranHasan13421/EzzeWatchList",
+      },
+    ],
+    techArchitecture: {
+      frontend: ["Flutter 3.x", "Dart 3.x", "Hero Animations"],
+      backend: ["SQLite (sqflite)", "Planned Supabase Sync"],
+      stateManagement: ["Provider (ChangeNotifier)"],
+      storage: ["On-device Database", "SharedPreferences"],
     },
   },
 };

@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PlexusBackground from "../../components/PlexusBackground";
 import { projectSlugs, projectsData } from "../../data/projects";
 import ProjectHeaderNav from "./ProjectHeaderNav";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+const techIconMap: Record<string, string> = {
+  Flutter: "/assets/icons/flutter.svg",
+  Dart: "/assets/icons/dart.svg",
+  Supabase: "/assets/icons/supabase.svg",
+  Figma: "/assets/icons/figma.svg",
+  Git: "/assets/icons/github.svg",
+  Android: "/assets/icons/android.svg",
+};
 
 export async function generateStaticParams() {
   return projectSlugs.map((slug) => ({ slug }));
@@ -61,7 +71,10 @@ export default async function ProjectPage({ params }: PageProps) {
   const nextProject = projectsData[nextSlug];
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+    <main className="relative min-h-screen overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+      {/* Interactive Plexus Canvas Background */}
+      <PlexusBackground />
+
       {/* Ambient background glows */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[8%] top-[5%] h-[450px] w-[450px] rounded-full bg-[#1D6FE8]/10 blur-[150px]" />
@@ -101,24 +114,50 @@ export default async function ProjectPage({ params }: PageProps) {
                 </span>
               </div>
 
-              <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-[var(--text-primary)]">
-                {project.title}
-                <span className="block text-2xl sm:text-3xl font-bold text-[var(--primary-blue)] mt-2">
-                  {project.subtitle}
-                </span>
-              </h1>
+              {/* Title with Official Rounded Project Logo */}
+              <div className="mt-5 flex items-center gap-4">
+                {project.logoUrl && (
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-2 shadow-lg">
+                    <Image
+                      src={project.logoUrl}
+                      alt={`${project.title} Logo`}
+                      width={52}
+                      height={52}
+                      className="h-13 w-13 rounded-xl object-contain"
+                    />
+                  </div>
+                )}
+                <div>
+                  <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-[var(--text-primary)]">
+                    {project.title}
+                  </h1>
+                  <span className="block text-xl sm:text-2xl font-bold text-[var(--primary-blue)] mt-1">
+                    {project.subtitle}
+                  </span>
+                </div>
+              </div>
 
               <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[var(--text-secondary)]">
                 {project.description}
               </p>
 
+              {/* Technologies with Rounded Devicons */}
               <div className="mt-7 flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-[var(--border-color)] bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)]"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border-color)] bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)] shadow-xs"
                   >
-                    {tech}
+                    {techIconMap[tech] && (
+                      <Image
+                        src={techIconMap[tech]}
+                        alt={tech}
+                        width={14}
+                        height={14}
+                        className="h-3.5 w-3.5 rounded-xs object-contain"
+                      />
+                    )}
+                    <span>{tech}</span>
                   </span>
                 ))}
               </div>
@@ -130,7 +169,14 @@ export default async function ProjectPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl bg-[var(--primary-blue)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(29,111,232,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_35px_rgba(29,111,232,0.45)]"
                 >
-                  View on GitHub ↗
+                  <Image
+                    src="/assets/icons/github.svg"
+                    alt="GitHub"
+                    width={18}
+                    height={18}
+                    className="h-4.5 w-4.5 rounded-sm object-contain invert dark:invert-0"
+                  />
+                  <span>View on GitHub ↗</span>
                 </a>
 
                 <Link
@@ -218,7 +264,7 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Ecosystem Breakdown (For EzzeWash multi-platform architecture) */}
+      {/* Ecosystem Breakdown (With Individual Component Logos) */}
       {project.ecosystemComponents && project.ecosystemComponents.length > 0 && (
         <section className="border-t border-[var(--border-color)] px-6 py-20 sm:px-10 lg:px-16 bg-[var(--bg-secondary)]/50">
           <div className="mx-auto max-w-6xl">
@@ -238,11 +284,26 @@ export default async function ProjectPage({ params }: PageProps) {
                   key={comp.name}
                   className="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-7 transition-all hover:-translate-y-1 hover:border-[var(--primary-blue)]"
                 >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                      {comp.name}
-                    </h3>
-                    <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-elevated)] px-3 py-1 text-[10px] font-semibold text-[var(--primary-blue)]">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      {comp.logoUrl && (
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-1.5 shadow-sm">
+                          <Image
+                            src={comp.logoUrl}
+                            alt={`${comp.name} Logo`}
+                            width={36}
+                            height={36}
+                            className="h-9 w-9 rounded-lg object-contain"
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-xl font-bold text-[var(--text-primary)]">
+                          {comp.name}
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-elevated)] px-3 py-1 text-[10px] font-semibold text-[var(--primary-blue)] shrink-0">
                       {comp.role}
                     </span>
                   </div>
@@ -330,15 +391,26 @@ export default async function ProjectPage({ params }: PageProps) {
                   className="group rounded-2xl border border-[var(--border-color)] bg-[var(--bg-card)] p-6 transition-all hover:-translate-y-1 hover:border-[var(--primary-blue)]"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-[var(--text-primary)]">
-                        {repo.title}
-                      </h3>
-                      {repo.badge && (
-                        <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-elevated)] px-2 py-0.5 text-[9px] font-semibold text-[var(--primary-blue)]">
-                          {repo.badge}
-                        </span>
-                      )}
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-2 shadow-xs transition-transform group-hover:scale-105">
+                        <Image
+                          src="/assets/icons/github.svg"
+                          alt="GitHub"
+                          width={20}
+                          height={20}
+                          className="h-5 w-5 rounded-xs object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-[var(--text-primary)]">
+                          {repo.title}
+                        </h3>
+                        {repo.badge && (
+                          <span className="rounded-full border border-[var(--border-color)] bg-[var(--bg-elevated)] px-2 py-0.5 text-[9px] font-semibold text-[var(--primary-blue)]">
+                            {repo.badge}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <span className="text-[var(--primary-blue)] transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5">
                       ↗
@@ -361,16 +433,29 @@ export default async function ProjectPage({ params }: PageProps) {
       <section className="border-t border-[var(--border-color)] px-6 py-20 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 sm:p-12 shadow-xl">
-            <div>
-              <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
-                CONTINUE EXPLORING
-              </p>
-              <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                Next: {nextProject.title}
-              </h2>
-              <p className="mt-2 max-w-md text-xs sm:text-sm text-[var(--text-secondary)]">
-                {nextProject.subtitle}
-              </p>
+            <div className="flex items-center gap-4">
+              {nextProject.logoUrl && (
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-1.5 shadow-md">
+                  <Image
+                    src={nextProject.logoUrl}
+                    alt={`${nextProject.title} Logo`}
+                    width={44}
+                    height={44}
+                    className="h-11 w-11 rounded-xl object-contain"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
+                  CONTINUE EXPLORING
+                </p>
+                <h2 className="mt-1 text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                  Next: {nextProject.title}
+                </h2>
+                <p className="mt-1 max-w-md text-xs sm:text-sm text-[var(--text-secondary)]">
+                  {nextProject.subtitle}
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
