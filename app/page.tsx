@@ -307,18 +307,18 @@ export default function Home() {
               <span>Software Developer • Bangladesh</span>
             </div>
 
-            <p className="mb-2 text-xs font-bold tracking-[0.25em] text-[var(--primary-blue)] uppercase">
-              MD. IMRAN HASAN
-            </p>
-
-            <h1 className="max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-              Software
-              <span className="block text-[var(--primary-blue)]">
-                Developer.
+            <h1 className="max-w-4xl text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl text-[var(--text-primary)]">
+              MD. IMRAN{" "}
+              <span className="text-[var(--primary-blue)]">
+                HASAN
               </span>
             </h1>
 
-            <p className="mt-5 text-lg font-semibold sm:text-xl text-[var(--text-primary)]">
+            <p className="mt-3 text-xl font-semibold tracking-tight sm:text-2xl text-[var(--text-secondary)]">
+              Software Developer
+            </p>
+
+            <p className="mt-2 text-base font-medium sm:text-lg text-[var(--text-secondary)]">
               Flutter <span className="mx-2 text-[var(--primary-blue)]">•</span> UI/UX{" "}
               <span className="mx-2 text-[var(--primary-blue)]">•</span> Product Development
             </p>
@@ -453,12 +453,25 @@ export default function Home() {
               <p className="text-xs font-bold tracking-[0.2em] text-[var(--primary-blue)]">
                 ACADEMIC FOUNDATION
               </p>
-              <h3 className="mt-4 text-xl font-bold text-[var(--text-primary)]">
-                BSc in Computer Science &amp; Engineering
-              </h3>
-              <p className="mt-1 text-sm font-medium text-[var(--text-secondary)]">
-                Shyamoli Engineering College • Session: 2020–2021
-              </p>
+              <div className="mt-4 flex items-center gap-4 sm:gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[var(--border-color)] bg-[var(--bg-elevated)] p-2 shadow-sm overflow-hidden">
+                  <Image
+                    src="/assets/icons/shyamoli_logo.webp"
+                    alt="Shyamoli Engineering College Logo"
+                    width={56}
+                    height={56}
+                    className="h-full w-full rounded-xl object-contain"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)] sm:text-2xl">
+                    BSc in Computer Science &amp; Engineering
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-[var(--text-secondary)]">
+                    Shyamoli Engineering College • Session: 2020–2021
+                  </p>
+                </div>
+              </div>
               <div className="my-5 h-px bg-[var(--border-color)]" />
               <p className="text-xs leading-relaxed text-[var(--text-secondary)]">
                 Solid academic grounding in software development, data structures, algorithms,
