@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const skills = [
@@ -173,7 +174,6 @@ const journey = [
 export default function Home() {
   const [dark, setDark] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [activeProject, setActiveProject] = useState<string | null>(null);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   useEffect(() => {
@@ -732,7 +732,7 @@ export default function Home() {
                   onClick={() =>
                     setActiveSkill(active ? null : skill.title)
                   }
-                  className={`group text-left rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
+                  className={`group rounded-2xl border p-6 text-left transition-all duration-300 hover:-translate-y-1 ${
                     active
                       ? dark
                         ? "border-[#1D6FE8] bg-[#111C2B]"
@@ -905,7 +905,6 @@ export default function Home() {
                     <div className="mt-5 h-24 rounded-xl bg-[#1D6FE8]/10" />
                     <div className="mt-3 h-3 w-20 rounded bg-white/10" />
                     <div className="mt-2 h-2 w-14 rounded bg-[#23354D]" />
-
                     <div className="mt-5 h-8 rounded-lg bg-[#1D6FE8]/30" />
                   </div>
                 </div>
@@ -978,166 +977,117 @@ export default function Home() {
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href="/projects/ezzewash"
+                    className="rounded-xl bg-[#1D6FE8] px-5 py-3 text-sm font-semibold text-white transition-all hover:shadow-[0_0_30px_rgba(29,111,232,0.3)]"
+                  >
+                    Project Details →
+                  </Link>
+
                   <a
                     href="https://github.com/ImranHasan13421"
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-xl bg-[#1D6FE8] px-5 py-3 text-sm font-semibold text-white transition-all hover:shadow-[0_0_30px_rgba(29,111,232,0.3)]"
-                  >
-                    Explore Project ↗
-                  </a>
-
-                  <button
-                    onClick={() =>
-                      setActiveProject(
-                        activeProject === "ezzewash" ? null : "ezzewash"
-                      )
-                    }
                     className={`rounded-xl border px-5 py-3 text-sm font-semibold ${
                       dark
                         ? "border-[#23354D] bg-[#111C2B] hover:border-[#1D6FE8]"
                         : "border-slate-200 bg-white hover:border-[#1D6FE8]"
                     }`}
                   >
-                    {activeProject === "ezzewash"
-                      ? "Hide Details"
-                      : "Project Details"}
-                  </button>
+                    GitHub ↗
+                  </a>
                 </div>
-
-                {activeProject === "ezzewash" && (
-                  <div
-                    className={`mt-5 rounded-xl border p-4 text-xs leading-6 ${
-                      dark
-                        ? "border-[#1D6FE8]/20 bg-[#1D6FE8]/5 text-[#9AAEC4]"
-                        : "border-[#1D6FE8]/15 bg-[#1D6FE8]/5 text-slate-500"
-                    }`}
-                  >
-                    EzzeWash is structured as an ecosystem rather than a
-                    single application, with separate experiences for
-                    customers, administrators, riders, and the promotional
-                    website.
-                  </div>
-                )}
               </div>
             </div>
           </article>
 
           {/* Other Projects */}
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {projects.slice(1).map((project) => {
-              const active = activeProject === project.id;
-
-              return (
-                <article
-                  key={project.id}
-                  className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-                    active
-                      ? dark
-                        ? "border-[#1D6FE8]/70 bg-[#111C2B]"
-                        : "border-[#1D6FE8]/50 bg-white"
-                      : dark
-                        ? "border-[#23354D] bg-[#111C2B]/55 hover:border-[#1D6FE8]/40"
-                        : "border-slate-200 bg-white hover:border-[#1D6FE8]/40"
+            {projects.slice(1).map((project) => (
+              <article
+                key={project.id}
+                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                  dark
+                    ? "border-[#23354D] bg-[#111C2B]/55 hover:border-[#1D6FE8]/40"
+                    : "border-slate-200 bg-white hover:border-[#1D6FE8]/40"
+                }`}
+              >
+                <div
+                  className={`relative h-36 overflow-hidden border-b ${
+                    dark
+                      ? "border-[#23354D] bg-[#080F1B]"
+                      : "border-slate-200 bg-slate-50"
                   }`}
                 >
-                  <div
-                    className={`relative h-36 overflow-hidden border-b ${
-                      dark
-                        ? "border-[#23354D] bg-[#080F1B]"
-                        : "border-slate-200 bg-slate-50"
-                    }`}
-                  >
-                    <div className="absolute left-6 top-5 text-5xl font-bold text-[#1D6FE8]/10">
-                      {project.number}
-                    </div>
-
-                    <div className="absolute right-7 top-1/2 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-2xl border border-[#23354D] bg-[#111C2B]">
-                      <span className="text-xl text-[#1D6FE8]">✦</span>
-                    </div>
-
-                    <div className="absolute bottom-5 left-6">
-                      <p className="text-[9px] font-semibold tracking-[0.2em] text-[#1D6FE8]">
-                        {project.category}
-                      </p>
-
-                      <p className="mt-1 text-lg font-bold">{project.title}</p>
-                    </div>
+                  <div className="absolute left-6 top-5 text-5xl font-bold text-[#1D6FE8]/10">
+                    {project.number}
                   </div>
 
-                  <div className="p-7">
-                    <h3 className="text-xl font-semibold">
-                      {project.subtitle}
-                    </h3>
+                  <div className="absolute right-7 top-1/2 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-2xl border border-[#23354D] bg-[#111C2B]">
+                    <span className="text-xl text-[#1D6FE8]">✦</span>
+                  </div>
 
-                    <p
-                      className={`mt-4 text-sm leading-6 ${
-                        dark ? "text-[#9AAEC4]" : "text-slate-500"
-                      }`}
-                    >
-                      {project.description}
+                  <div className="absolute bottom-5 left-6">
+                    <p className="text-[9px] font-semibold tracking-[0.2em] text-[#1D6FE8]">
+                      {project.category}
                     </p>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {project.technologies.map((technology) => (
-                        <span
-                          key={technology}
-                          className={`rounded-full border px-3 py-1 text-[10px] ${
-                            dark
-                              ? "border-[#23354D] text-[#9AAEC4]"
-                              : "border-slate-200 text-slate-500"
-                          }`}
-                        >
-                          {technology}
-                        </span>
-                      ))}
-                    </div>
+                    <p className="mt-1 text-lg font-bold">{project.title}</p>
+                  </div>
+                </div>
 
-                    <div className="mt-7 flex items-center gap-3">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded-xl bg-[#1D6FE8] px-4 py-2.5 text-xs font-semibold text-white"
-                      >
-                        GitHub ↗
-                      </a>
+                <div className="p-7">
+                  <h3 className="text-xl font-semibold">
+                    {project.subtitle}
+                  </h3>
 
-                      <button
-                        onClick={() =>
-                          setActiveProject(active ? null : project.id)
-                        }
-                        className={`rounded-xl border px-4 py-2.5 text-xs font-semibold ${
+                  <p
+                    className={`mt-4 text-sm leading-6 ${
+                      dark ? "text-[#9AAEC4]" : "text-slate-500"
+                    }`}
+                  >
+                    {project.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.technologies.map((technology) => (
+                      <span
+                        key={technology}
+                        className={`rounded-full border px-3 py-1 text-[10px] ${
                           dark
-                            ? "border-[#23354D] bg-[#0B1220] hover:border-[#1D6FE8]"
-                            : "border-slate-200 bg-white hover:border-[#1D6FE8]"
+                            ? "border-[#23354D] text-[#9AAEC4]"
+                            : "border-slate-200 text-slate-500"
                         }`}
                       >
-                        {active ? "Hide Details" : "View Details"}
-                      </button>
-                    </div>
-
-                    {active && (
-                      <div className="mt-5 grid gap-2">
-                        {project.details.map((detail) => (
-                          <div
-                            key={detail}
-                            className={`rounded-lg border px-3 py-2 text-xs ${
-                              dark
-                                ? "border-[#23354D] text-[#9AAEC4]"
-                                : "border-slate-200 text-slate-500"
-                            }`}
-                          >
-                            <span className="mr-2 text-[#1D6FE8]">+</span>
-                            {detail}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                        {technology}
+                      </span>
+                    ))}
                   </div>
-                </article>
-              );
-            })}
+
+                  <div className="mt-7 flex items-center gap-3">
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className="rounded-xl bg-[#1D6FE8] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:shadow-[0_0_25px_rgba(29,111,232,0.25)]"
+                    >
+                      View Details →
+                    </Link>
+
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`rounded-xl border px-4 py-2.5 text-xs font-semibold ${
+                        dark
+                          ? "border-[#23354D] bg-[#0B1220] hover:border-[#1D6FE8]"
+                          : "border-slate-200 bg-white hover:border-[#1D6FE8]"
+                      }`}
+                    >
+                      GitHub ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
 
           <div
